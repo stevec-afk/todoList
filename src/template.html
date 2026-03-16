@@ -11,6 +11,26 @@
     <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;700&amp;family=Sacramento&amp;display=swap" rel="stylesheet">
 </head>
 <body>
-    Hello World!
+    <div id="main-container">
+        <div id="sidebar">
+            Sidebar
+            <button id="new-task">Add Task</button>
+        </div>
+        <div id="content">
+            <div class="task-card">
+                <input type="checkbox" class="task-toggle">
+                <span class="task-title">Finish Webpack Setup</span>
+                <span class="task-date">March 20th</span>
+                <button class="expand-btn">⌄</button>
+            </div>
+            <div class="task-details">
+                <p class="task-desc">Move the logic into three files and test the build.</p>
+                <div class="task-footer">
+                  <span class="task-priority">High</span>
+                  <button class="edit-btn">Edit</button>
+                  <button class="delete-btn">Delete</button>
+                </div>
+              </div>
+        </div>
 </body>
 </html> 
