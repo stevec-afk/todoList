@@ -12,25 +12,41 @@
 </head>
 <body>
     <div id="main-container">
+        <div id="title"> 
+            ToDo List
+        </div>
         <div id="sidebar">
-            Sidebar
             <button id="new-task">Add Task</button>
+            <div class="sidebar-container"> 
+                <button id="all-tasks">All Tasks</button>
+                <button id="no-due-date">No Due Date</button>
+                <button id="due-today">Today</button>
+                <button id="due-tomorrow">Tomorrow</button>
+                <button id="due-month">This month</button>
+            </div>
+            </br>
+            <div class="sidebar-container">
+                Categories
+                <button id="">Work</button>
+                <button id="">School</button>
+                <button id="">Personal</button>
+                <button id="">Long-term</button>
+            </div>
+        </div>
+        <div id="side-footer">
+            <button id="reset">⚠️Reset all data⚠️</button>
+            <span> Steve C | source </span>
+        </div>
+        <div id="header">
+            Current view
         </div>
         <div id="content">
             <div class="task-card">
                 <input type="checkbox" class="task-toggle">
                 <span class="task-title">Finish Webpack Setup</span>
                 <span class="task-date">March 20th</span>
-                <button class="expand-btn">⌄</button>
+                <button class="details-btn">...</button>
             </div>
-            <div class="task-details">
-                <p class="task-desc">Move the logic into three files and test the build.</p>
-                <div class="task-footer">
-                  <span class="task-priority">High</span>
-                  <button class="edit-btn">Edit</button>
-                  <button class="delete-btn">Delete</button>
-                </div>
-              </div>
         </div>
 </body>
 </html> 
