@@ -29,7 +29,15 @@ Useful NPM modules:
 - Built by & source links bottom left
 - No "inbox" - its not email.
 - No fake "user" - there's no login, only localstorage
+- Categories instead of projects.
 
-# Extra features 
+# Extra features (don't do these until you have a working app)
 - Light / dark mode 
 - Mobile friendly
+- Repeating tasks
+
+# scripting / program notes
+- use data-attributes for buttons
+- Make a variable that keeps track of "state" for current view header
+- Default data 
+- integrate date-fns for calendar and dates.
