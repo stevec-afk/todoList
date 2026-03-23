@@ -1,4 +1,4 @@
-// The library
+// The library - an array of objects
 let myTodoList = [];
 
 // The factory - this is a function that RETURNS an object.
