@@ -48,8 +48,9 @@
                 <button class="details-btn">...</button>
             </div>
         </div>
-        <dialog id="newTodoModal">
+        <dialog id="new-todo-modal">
             <form method="dialog" id="form">
+                <button type="submit" class="close-btn" formmethod="dialog" formnovalidate>&times</button>
                 <h3>Add new todo</h3>
                 <label>Title<input type=text name="title" required /></label>
                 <label>Description<input type=text name="description" required /></label>
@@ -58,7 +59,7 @@
                 <label>Priority<input type=text name="priority" required /></label>
                 <label>Category<input type=text name="category" /></label>
                 <div>
-                    <button type="submit" id="closeBtn" formmethod="dialog" formnovalidate>Cancel</button>
+                    <button type="submit" class="close-btn" formmethod="dialog" formnovalidate>Cancel</button>
                     <button type="submit">Submit</button>
                 </div>
             </form>

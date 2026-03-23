@@ -1,5 +1,5 @@
 const $sidebar = document.getElementById("sidebar");
-const $newTodoModal = document.getElementById("newTodoModal");
+const $newTodoModal = document.getElementById("new-todo-modal");
 const $form = document.getElementById("form");
 const $mainContent = document.getElementById("content");
 
@@ -31,6 +31,10 @@ $newTodoModal.addEventListener("click", (e) => {
 
 // Event listner to submit the form
 $form.addEventListener("submit", (e) => {
+    if (e.submitter.classList.contains("close-btn")){ 
+        $form.reset(); 
+        return;
+    }
     // Do stuff with the data
     $form.reset();
 });
