@@ -41,3 +41,10 @@ Useful NPM modules:
 - Make a variable that keeps track of "state" for current view header
 - Default data 
 - integrate date-fns for calendar and dates.
+- FormData API
+
+
+# Parts that can be written right now: 
+- Event listner for side panel to capture clicks
+- clearModal() function to clear the form when closed.
+- 
