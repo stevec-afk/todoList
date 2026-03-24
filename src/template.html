@@ -52,13 +52,38 @@
             <form method="dialog" id="form">
                 <button type="submit" class="close-btn" formmethod="dialog" formnovalidate>&times</button>
                 <h3>Add new todo</h3>
-                <label>Title<input type=text name="title" required /></label>
-                <label>Description<input type=text name="description" required /></label>
-                <label>Category<input type=text name="category" /></label>
-                <label>Due date<input type=text name="duedate" /></label>
-                <label>Priority<input type=text name="priority" required /></label>
-                <label>Category<input type=text name="category" /></label>
-                <div>
+
+                <div class="form-group">
+                    <label for="todo-title">Title</label>
+                    <input type="text" id="todo-title" name="title" maxlength="80" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="todo-desc">Description</label>
+                    <input type="text" id ="todo-desc" name="description" maxlength="140" />
+                </div>
+
+                <div class="form-group">
+                    <label for="todo-cat">Category</label>
+                    <input type="text" id="todo-cat" name="category" />
+                </div>
+
+                <div class="form-group">
+                    <label for="todo-date">Due date</label>
+                    <input type="date" id="todo-date" name="duedate" />
+                </div>
+
+                <div class="form-group">
+                    <label for="todo-prio">Priority</label>
+                    <select type="text" id="todo-prio" name="priority" required>
+                        <option value="" disabled selected>Select Priority</option>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                
+                <div class="form-actions">
                     <button type="submit" class="close-btn" formmethod="dialog" formnovalidate>Cancel</button>
                     <button type="submit">Submit</button>
                 </div>

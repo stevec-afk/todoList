@@ -25,8 +25,8 @@ const todo = (title, description, duedate, category, priority) => {
 
 // The librarian - this IS an object, it manages our [] library.
 const todoManager =  {
-    add: (title, desc, date, cat, prio) => {
-        const newTodo = todo(title, desc, date, cat, prio);
+    add: ({ title, description, duedate, category = "Uncategorized", priority}) => {
+        const newTodo = todo(title, description, duedate, category, priority);
         myTodoList.push(newTodo);
     },
     getAll: () => [...myTodoList],
