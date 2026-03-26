@@ -6,6 +6,15 @@ html {
     box-sizing: inherit;
 }
 
+button {
+    /* button styles here */ 
+
+    & * {
+        /* prevents any elements inside the button from capturing clicks */
+        pointer-events: none;
+    }
+}
+
 #main-container {
     display: grid;
     grid-template-areas:

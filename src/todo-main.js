@@ -26,32 +26,33 @@ const defaultData = [
 let myTodoList = [];
 
 // The factory - this is a function that RETURNS an object.
-const todo = (title, description, duedate, category, priority) => {
-    // define internal logic and private variables here
-    let status = false;
-    const id = Date.now();
-
-    const getStatus = () => status;
-    const toggleComplete = () => status = !status;
-
+const todo = ({
+    title, 
+    description, 
+    duedate, 
+    category, 
+    priority, 
+    id = crypto.randomUUID(), 
+    status = false 
+}) => {
     return {
-        // object that contains the properties and methods we want
         title,
         description,
         duedate,
         category,
         priority,
         id,
-        getStatus,
-        toggleComplete
+        status,
+        //toggleComplete
     };
 };
 
 // The librarian - this IS an object, it manages our [] library.
 const todoManager =  {
-    add: ({ title, description, duedate, category = "Uncategorized", priority}) => {
-        const newTodo = todo(title, description, duedate, category, priority);
+    add: (data) => {
+        const newTodo = todo(data);
         myTodoList.push(newTodo);
+        todoManager.save();
     },
     getAll: () => [...myTodoList],
     remove: (id) => { 
@@ -65,9 +66,32 @@ const todoManager =  {
         targetTask.toggleComplete();
     },
     loadDefaults: () => {
-        defaultData.forEach(item => {
-            todoManager.add(item);
-        })
+        defaultData.forEach(item => todoManager.add(item));
+    },
+    save: () => {
+        const listString = JSON.stringify(myTodoList);
+        localStorage.setItem("myTodoList", listString);
+    },
+    init: () => {
+        const savedData = localStorage.getItem("myTodoList");
+        let dataToLoad;
+
+        // Try to parse. If savedData is null, JSON.parse(null) is actually null (not an error).
+        // If savedData is "garbage" text, this line will "throw" to the catch block.
+        try {
+            dataToLoad = JSON.parse(savedData);
+        } catch (error) {
+            console.error("Save file corrupted, clearing storage.")
+            dataToLoad = null;
+        }
+
+        const finalArray = dataToLoad || defaultData;
+        finalArray.forEach(item => todoManager.add(item));
+    },
+    resetApp: () => {
+        localStorage.clear(); // nukes everything in localStorage! 
+        myTodoList = [];
+        todoManager.init();
     }
 }; 
 

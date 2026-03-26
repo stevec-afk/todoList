@@ -18,16 +18,21 @@ initializeFormDefaults();
 
 // Event listner for the sidebar
 $sidebar.addEventListener("click", (e) => {
-    const target = e.target.innerText;
+    const btn = e.target.closest("button");
+    if (!btn) return;
 
-    switch (target) {
-        case "Add Task":
+    switch (btn.id) {
+        case "new-task":
             $newTodoModal.showModal();
             break;
         case "reset":
-            // reset the data
+            console.log("Reset clicked!");
+            if (confirm("Nuke everything and restore defaults?")) {
+                todoManager.resetApp();
+                console.log("Current Tasks:", todoManager.getAll());
+                // Render the app
+            }
             break;
-        default: break;
     }
 });
 
