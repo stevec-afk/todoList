@@ -1,3 +1,27 @@
+const defaultData = [
+    {
+        title: "Pay Bills",
+        description: "Electric and Internet bills due",
+        duedate: "2026-10-01", 
+        category: "Personal",
+        priority: "high"
+    },
+    {
+        title: "Walk the Dog",
+        description: "Take Fido to the park",
+        duedate: "2026-10-05",
+        category: "Personal",
+        priority: "medium"
+    },
+    {
+        title: "Finish Project",
+        description: "Complete the Odin Project ToDo list",
+        duedate: "2026-10-10", 
+        category: "Work",
+        priority: "low"
+    }
+];
+
 // The library - an array of objects
 let myTodoList = [];
 
@@ -39,6 +63,11 @@ const todoManager =  {
     toggleStatus: (id) => {
         const targetTask = myTodoList.find(task => task.id === id);
         targetTask.toggleComplete();
+    },
+    loadDefaults: () => {
+        defaultData.forEach(item => {
+            todoManager.add(item);
+        })
     }
 }; 
 
