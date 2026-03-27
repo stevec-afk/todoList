@@ -4,6 +4,7 @@ html {
   
 *, *:before, *:after {
     box-sizing: inherit;
+    margin: 0;
 }
 
 button {
@@ -15,22 +16,22 @@ button {
     }
 }
 
-#main-container {
-    display: grid;
-    grid-template-areas:
-        "title header"
-        "sidebar content"
-        "footer content";
-    grid-template-columns: 250px 1fr;
-    min-height: 100vh;
+#sidebar { 
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: 250px;
+    height: 100%;
+    z-index: 999; 
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
 }
 
-#title {
-    grid-area: title;
+#sidebar.active {
+    transform: translateX(0);
 }
 
 #sidebar {
-    grid-area: sidebar;
+    grid-area: side;
     background-color: #f4f4f4;
     display: flex; 
     flex-direction: column;
@@ -51,7 +52,6 @@ button {
 }
 
 #side-footer {
-    grid-area: footer;
     display: flex;
     flex-direction: column;
     margin-top: auto;
@@ -61,4 +61,23 @@ button {
 .sidebar-container {
     display: flex;
     flex-direction: column;
+}
+
+@media (min-width: 768px) {
+    #main-container {
+        display: grid;
+        grid-template-areas:
+            "side header"
+            "side content"
+            "side content";
+        grid-template-columns: 250px 1fr;
+        min-height: 100vh;
+        margin: 0;
+    }
+    
+    #sidebar {
+        position: static;
+        transform: none;
+        width: auto;
+    }
 }

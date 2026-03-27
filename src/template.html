@@ -12,42 +12,44 @@
 </head>
 <body>
     <div id="main-container">
-        <div id="title"> 
-            ToDo List
-        </div>
-        <div id="sidebar">
-            <button id="new-task">Add Task</button>
-            <div class="sidebar-container"> 
-                <button id="all-tasks">All Tasks</button>
-                <button id="no-due-date">No Due Date</button>
-                <button id="due-today">Today</button>
-                <button id="due-tomorrow">Tomorrow</button>
-                <button id="due-month">This month</button>
+        <aside id="sidebar">
+            <div id="title"> 
+                ToDo List
             </div>
-            </br>
-            <div class="sidebar-container">
-                Categories
-                <button id="">Work</button>
-                <button id="">School</button>
-                <button id="">Personal</button>
-                <button id="">Long-term</button>
+            <div id="sidebar-main">
+                <button id="new-task">Add Task</button>
+                <div class="sidebar-container"> 
+                    <button id="all-tasks">All Tasks</button>
+                    <button id="no-due-date">No Due Date</button>
+                    <button id="due-today">Today</button>
+                    <button id="due-tomorrow">Tomorrow</button>
+                    <button id="due-month">This month</button>
+                </div>
+                </br>
+                <div class="sidebar-container">
+                    Categories
+                    <button id="">Work</button>
+                    <button id="">School</button>
+                    <button id="">Personal</button>
+                    <button id="">Long-term</button>
+                </div>
             </div>
-        </div>
-        <div id="side-footer">
-            <button id="reset">⚠️Reset all data⚠️</button>
-            <span> Steve C | source </span>
-        </div>
+            <div id="side-footer">
+                <button id="reset">⚠️Reset all data⚠️</button>
+                <span> Steve C | source </span>
+            </div>
+        </aside>
         <div id="header">
             Current view
         </div>
-        <div id="content">
+        <main id="content">
             <div class="task-card">
                 <input type="checkbox" class="task-toggle">
                 <span class="task-title">Finish Webpack Setup</span>
                 <span class="task-date">March 20th</span>
                 <button class="details-btn">...</button>
             </div>
-        </div>
+        </main>
         <dialog id="new-todo-modal">
             <form method="dialog" id="form">
                 <button type="submit" class="close-btn" formmethod="dialog" formnovalidate>&times</button>
