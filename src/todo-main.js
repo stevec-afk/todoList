@@ -95,7 +95,11 @@ const todoManager =  {
         localStorage.clear(); // nukes everything in localStorage! 
         myTodoList = [];
         todoManager.init();
-    }
+    },
+    getCategories: () => {
+        const allCategories = myTodoList.map(todo => todo.category);
+        return [...new Set(allCategories)]; 
+    },
 }; 
 
 export { todoManager }; 
