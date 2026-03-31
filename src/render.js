@@ -26,7 +26,11 @@ function createTaskRow (todo) {
     $checkbox.type = 'checkbox';
     $checkbox.checked = todo.status;
 
+    // If the todo is completed, add a CSS class for strikethough text
     const $todoTitle = createHtmlElement('span', todo.title);
+    if (todo.status === true) {
+        $todoTitle.classList.add('completed');
+    }
     const $dueDate = createHtmlElement('span', todo.duedate);
  
     // a "more details" button that will bring up a modal

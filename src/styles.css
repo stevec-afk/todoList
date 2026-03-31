@@ -81,3 +81,8 @@ button {
         width: auto;
     }
 }
+
+/* Styles for completed todos in the list */
+.completed {
+    text-decoration: line-through;
+}
