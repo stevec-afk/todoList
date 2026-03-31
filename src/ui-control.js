@@ -1,5 +1,6 @@
 import { todoManager } from "./todo-main";
 import { format } from 'date-fns';
+import { renderAllTodos } from "./render";
 
 const $sidebar = document.getElementById("sidebar");
 const $newTodoModal = document.getElementById("new-todo-modal");
@@ -30,7 +31,7 @@ $sidebar.addEventListener("click", (e) => {
             if (confirm("Nuke everything and restore defaults?")) {
                 todoManager.resetApp();
                 console.log("Current Tasks:", todoManager.getAll());
-                // Render the app
+                renderAllTodos();
             }
             break;
     }
@@ -56,6 +57,7 @@ $form.addEventListener("submit", (e) => {
 
     const data = Object.fromEntries(new FormData(e.target));
     todoManager.add(data);
+    renderAllTodos();
     $form.reset();
 });
 
