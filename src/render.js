@@ -15,18 +15,24 @@ function clearContent () {
     $mainContent.innerHTML = '';
 }
 
+// Create a row on the DOM for 1 todo element
 function createTaskRow (todo) {
+    // Create a container for 1 todo
     const $todoRow = createHtmlElement('div', undefined, ['todo-row']);
-    const $todoTitle = createHtmlElement('span', todo.title);
-    
+    $todoRow.dataset.id = todo.id; // Attach the todo ID to the container
+
+    // Add input checkbox for todo.status
     const $checkbox = createHtmlElement('input');
     $checkbox.type = 'checkbox';
     $checkbox.checked = todo.status;
 
+    const $todoTitle = createHtmlElement('span', todo.title);
     const $dueDate = createHtmlElement('span', todo.duedate);
-
+ 
+    // a "more details" button that will bring up a modal
     const $detailsBtn = createHtmlElement('button', '...', ['details-btn']);
 
+    // Append everything to the todo row from left to right
     $todoRow.appendChild($checkbox);
     $todoRow.appendChild($todoTitle);
     $todoRow.appendChild($dueDate);

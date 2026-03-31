@@ -63,7 +63,10 @@ const todoManager =  {
     },
     toggleStatus: (id) => {
         const targetTask = myTodoList.find(task => task.id === id);
-        targetTask.toggleComplete();
+        if (targetTask) {
+            targetTask.status = !targetTask.status;
+            todoManager.save();
+        }
     },
     loadDefaults: () => {
         defaultData.forEach(item => todoManager.add(item));

@@ -17,7 +17,7 @@ function initializeFormDefaults(){
 
 initializeFormDefaults();
 
-// Event listner for the sidebar
+// Event listener for the sidebar
 $sidebar.addEventListener("click", (e) => {
     const btn = e.target.closest("button");
     if (!btn) return;
@@ -37,7 +37,7 @@ $sidebar.addEventListener("click", (e) => {
     }
 });
 
-// Event listner for the form modal 
+// Event listener for the form modal 
 $newTodoModal.addEventListener("click", (e) => {
     const target = e.target.innerText; 
 
@@ -48,7 +48,7 @@ $newTodoModal.addEventListener("click", (e) => {
     }
 });
 
-// Event listner to submit the form
+// Event listener to submit the form
 $form.addEventListener("submit", (e) => {
     if (e.submitter.classList.contains("close-btn")){ 
         $form.reset(); 
@@ -61,13 +61,16 @@ $form.addEventListener("submit", (e) => {
     $form.reset();
 });
 
-// Event listner for the main content
+// Event listener for the main content
 $mainContent.addEventListener("click", (e) => {
-    const target = e.target.innerText; 
-
-    switch (target) {
-        case "":
-            break;
-        default: break;
+    if (e.target.type === 'checkbox') {
+        const targetTodo = e.target.closest('.todo-row').dataset.id;
+        todoManager.toggleStatus(targetTodo);
+        renderAllTodos();
     }
+    else if (e.target.classList.contains('details-btn')) {
+        // placeholder - open todo details modal
+    }
+
+    else return; 
 });
