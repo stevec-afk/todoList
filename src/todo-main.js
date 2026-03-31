@@ -43,7 +43,6 @@ const todo = ({
         priority,
         id,
         status,
-        //toggleComplete
     };
 };
 

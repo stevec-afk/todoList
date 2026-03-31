@@ -53,4 +53,14 @@ function renderAllTodos (){
     });
 }
 
-export { clearContent, renderAllTodos };
+function renderCategories () {
+    const $categoriesContainer = document.getElementById('categories');
+    $categoriesContainer.innerHTML = '';
+    const categories = todoManager.getCategories();
+    categories.forEach(item => {
+        const catButton = createHtmlElement('button', item, ['category-button']);
+        $categoriesContainer.appendChild(catButton);
+    });
+}
+
+export { clearContent, renderAllTodos, renderCategories };
