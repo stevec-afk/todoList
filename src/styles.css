@@ -63,6 +63,28 @@ button {
     flex-direction: column;
 }
 
+/* This targets the <dialog> element itself */
+dialog {
+    margin: auto; /* The magic trick for centering <dialog> */
+    padding: 2rem;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    width: 90%;
+    max-width: 450px;
+}
+
+/* This dims the background while the modal is open */
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px); /* Optional: adds a nice blur effect */
+}
+
+/* Styles for completed todos in the list */
+.completed {
+    text-decoration: line-through;
+}
+
 @media (min-width: 768px) {
     #main-container {
         display: grid;
@@ -82,7 +104,3 @@ button {
     }
 }
 
-/* Styles for completed todos in the list */
-.completed {
-    text-decoration: line-through;
-}
