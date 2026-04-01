@@ -1,5 +1,5 @@
 import { todoManager } from "./todo-main";
-import { format } from 'date-fns';
+import { format, isPast, isToday, isTomorrow, isThisMonth } from 'date-fns';
 import { renderAllTodos, renderCategories } from "./render";
 
 const $sidebar = document.getElementById("sidebar");
@@ -20,19 +20,13 @@ initializeFormDefaults();
 // Event listener for the sidebar
 $sidebar.addEventListener("click", (e) => {
     const btn = e.target.closest("button");
-    const selectedCategory = btn.dataset.category;
+    const selectedFilter = btn.dataset.category;
 
     if (!btn) return;
 
-    // Check if "All tasks" was clicked
-    if (selectedCategory === "All Tasks"){
-        renderAllTodos();
-        return;
-    }
-
     // Check if button is for a category filter
-    if (selectedCategory) {
-        const filtered = todoManager.getByCategory(selectedCategory);
+    if (selectedFilter) {
+        const filtered = todoManager.getByCategory(selectedFilter);
         renderAllTodos(filtered);
         return; 
     }
@@ -41,6 +35,37 @@ $sidebar.addEventListener("click", (e) => {
     switch (btn.id) {
         case "new-task":
             $newTodoModal.showModal();
+            break;
+        case "all-tasks":
+            renderAllTodos();
+            break;
+        case "no-due-date":
+            const noDateTasks = todoManager.getAll().filter(t => t.duedate === "");
+            renderAllTodos(noDateTasks);
+            break;
+        case "due-today":
+            const todayAndOverdue = todoManager.getAll().filter(t => {
+                if (!t.duedate) return false; // Skip tasks with no date
+                const date = new Date(t.duedate);
+                return isToday(date) || isPast(date);
+            });
+            renderAllTodos(todayAndOverdue);
+            break;
+        case "due-tomorrow":
+            const tomorrowTasks = todoManager.getAll().filter(t => {
+                if (!t.duedate) return false;
+                const date = new Date(t.duedate);
+                return isTomorrow(date);
+            });
+            renderAllTodos(tomorrowTasks);
+            break;
+        case "due-month":
+            const monthTasks = todoManager.getAll().filter(t => {
+                if (!t.duedate) return false;
+                const date = new Date(t.duedate);
+                return isThisMonth(date);
+            });
+            renderAllTodos(monthTasks);
             break;
         case "reset":
             console.log("Reset clicked!");

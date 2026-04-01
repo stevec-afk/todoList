@@ -2,14 +2,14 @@ const defaultData = [
     {
         title: "Pay Bills",
         description: "Electric and Internet bills due",
-        duedate: "2026-10-01", 
+        duedate: "2026-03-15", 
         category: "Personal",
         priority: "high"
     },
     {
         title: "Walk the Dog",
         description: "Take Fido to the park",
-        duedate: "2026-10-05",
+        duedate: "2026-04-01",
         category: "Personal",
         priority: "medium"
     },
@@ -22,7 +22,7 @@ const defaultData = [
     }
 ];
 
-const defaultCategories = ["All Tasks", "Work", "Personal", "School", "Long-term"];
+const defaultCategories = ["Work", "Personal", "School", "Long-term"];
 
 // The library - an array of objects
 let myTodoList = [];
