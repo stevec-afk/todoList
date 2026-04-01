@@ -1,6 +1,6 @@
 import { todoManager } from "./todo-main";
 import { format } from 'date-fns';
-import { renderAllTodos } from "./render";
+import { renderAllTodos, renderCategories } from "./render";
 
 const $sidebar = document.getElementById("sidebar");
 const $newTodoModal = document.getElementById("new-todo-modal");
@@ -20,8 +20,24 @@ initializeFormDefaults();
 // Event listener for the sidebar
 $sidebar.addEventListener("click", (e) => {
     const btn = e.target.closest("button");
+    const selectedCategory = btn.dataset.category;
+
     if (!btn) return;
 
+    // Check if "All tasks" was clicked
+    if (selectedCategory === "All Tasks"){
+        renderAllTodos();
+        return;
+    }
+
+    // Check if button is for a category filter
+    if (selectedCategory) {
+        const filtered = todoManager.getByCategory(selectedCategory);
+        renderAllTodos(filtered);
+        return; 
+    }
+
+    // if not, then its one of the following static buttons
     switch (btn.id) {
         case "new-task":
             $newTodoModal.showModal();
@@ -58,6 +74,7 @@ $form.addEventListener("submit", (e) => {
     const data = Object.fromEntries(new FormData(e.target));
     todoManager.add(data);
     renderAllTodos();
+    renderCategories();
     $form.reset();
 });
 

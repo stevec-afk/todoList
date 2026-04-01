@@ -44,9 +44,15 @@ function createTaskRow (todo) {
     return $todoRow;
 }
 
-function renderAllTodos (){
+function renderAllTodos (todoList = todoManager.getAll()){
     clearContent();
-    const todoList = todoManager.getAll();
+
+    // If the todo list is empty, show the empty message.
+    if (todoList.length === 0 ){
+        const $emptymsg = createHtmlElement('p', 'Nothing to do here!', ['empty-msg']);
+        $mainContent.appendChild($emptymsg);
+        return;
+    }
     todoList.forEach((todo) => {
         const $newRow = createTaskRow(todo);
         $mainContent.appendChild($newRow);
@@ -55,10 +61,12 @@ function renderAllTodos (){
 
 function renderCategories () {
     const $categoriesContainer = document.getElementById('categories');
-    $categoriesContainer.innerHTML = '';
     const categories = todoManager.getCategories();
+    $categoriesContainer.innerHTML = '';
+
     categories.forEach(item => {
         const catButton = createHtmlElement('button', item, ['category-button']);
+        catButton.dataset.category = item;
         $categoriesContainer.appendChild(catButton);
     });
 }

@@ -22,6 +22,8 @@ const defaultData = [
     }
 ];
 
+const defaultCategories = ["All Tasks", "Work", "Personal", "School", "Long-term"];
+
 // The library - an array of objects
 let myTodoList = [];
 
@@ -92,12 +94,16 @@ const todoManager =  {
     },
     resetApp: () => {
         localStorage.clear(); // nukes everything in localStorage! 
-        myTodoList = [];
-        todoManager.init();
+        myTodoList = []; // clears the todo list
+        todoManager.init(); // re-initialize from defaults
     },
     getCategories: () => {
-        const allCategories = myTodoList.map(todo => todo.category);
-        return [...new Set(allCategories)]; 
+        // Generates a list of categories from existing todos
+        const taskCategories = myTodoList.map(todo => todo.category);
+        // Combine the above list with the default categories
+        const combined = [...defaultCategories, ...taskCategories]
+        // Return a set of unique categories with dupes removed
+        return [...new Set(combined)]; 
     },
 }; 
 
