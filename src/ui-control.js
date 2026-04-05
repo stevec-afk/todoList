@@ -4,6 +4,7 @@ import { renderAllTodos, renderCategories } from "./render";
 
 const $sidebar = document.getElementById("sidebar");
 const $newTodoModal = document.getElementById("new-todo-modal");
+const $detailsModal = document.getElementById("details-modal");
 const $form = document.getElementById("form");
 const $mainContent = document.getElementById("content");
 
@@ -20,11 +21,11 @@ initializeFormDefaults();
 // Event listener for the sidebar
 $sidebar.addEventListener("click", (e) => {
     const btn = e.target.closest("button");
+    if (!btn) return; // Checks to make sure a button was clicked
+
     const selectedFilter = btn.dataset.category;
 
-    if (!btn) return;
-
-    // Check if button is for a category filter
+    // Check if button is for a category filter & apply filter
     if (selectedFilter) {
         const filtered = todoManager.getByCategory(selectedFilter);
         renderAllTodos(filtered);
@@ -78,40 +79,46 @@ $sidebar.addEventListener("click", (e) => {
     }
 });
 
-// Event listener for the form modal 
-$newTodoModal.addEventListener("click", (e) => {
-    const target = e.target.innerText; 
+// Event listener to close the modals
+function closeModal(e) { // I don't like this, needs refactor
 
-    switch (target) {
-        case "":
-            break;
-        default: $form.reset;
-    }
-});
+    if (e.target.closest(".close-btn, .cancel-btn")) this.close();
+};
+
+$newTodoModal.addEventListener("click", closeModal); 
+$detailsModal.addEventListener("click", closeModal);
 
 // Event listener to submit the form
 $form.addEventListener("submit", (e) => {
-    if (e.submitter.classList.contains("close-btn")){ 
-        $form.reset(); 
-        return;
-    }
-
     const data = Object.fromEntries(new FormData(e.target));
     todoManager.add(data);
+
     renderAllTodos();
     renderCategories();
+
     $form.reset();
+    $newTodoModal.close();
 });
 
 // Event listener for the main content
 $mainContent.addEventListener("click", (e) => {
+    const $targetRow = e.target.closest('.todo-row')
+    if (!$targetRow) return; // Check to make sure a todo row was clicked
+
+    const targetTodo = $targetRow.dataset.id;
+
     if (e.target.type === 'checkbox') {
-        const targetTodo = e.target.closest('.todo-row').dataset.id;
         todoManager.toggleStatus(targetTodo);
         renderAllTodos();
     }
     else if (e.target.classList.contains('details-btn')) {
-        // placeholder - open todo details modal
+        const task = todoManager.getById(targetTodo);
+        const $detailsModal = document.getElementById('details-modal');
+        document.getElementById('details-title').textContent = task.title;
+        document.getElementById('details-description').textContent = task.description;
+        document.getElementById('details-date').textContent = task.duedate;
+        document.getElementById('details-priority').textContent = task.priority;
+        $detailsModal.showModal();
     }
 
     else return; 

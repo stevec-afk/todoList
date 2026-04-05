@@ -105,6 +105,9 @@ const todoManager =  {
         // Return a set of unique categories with dupes removed
         return [...new Set(combined)]; 
     },
+    getById: (id) => {
+        return myTodoList.find(task => task.id === id);
+    },
 }; 
 
 export { todoManager }; 
