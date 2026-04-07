@@ -45,59 +45,73 @@
                 <button class="details-btn">...</button>
             </div>
         </main>
-        <dialog id="new-todo-modal">
-            <form method="dialog" id="form">
-                <button type="submit" class="close-btn" formmethod="dialog" formnovalidate>&times</button>
-                <h3>Add new todo</h3>
-
+        <dialog id="add-modal">
+            <button command="close" commandfor="add-modal" class="close-btn">X</button>
+            <form method="dialog" id="add-form">
+                <h3>Add new task</h3>
                 <div class="form-group">
-                    <label for="todo-title">Title</label>
-                    <input type="text" id="todo-title" name="title" maxlength="80" required />
+                    <label for="add-title">Title*</label>
+                    <input type="text" id="add-title" name="title" maxlength="80" required />
                 </div>
-
                 <div class="form-group">
-                    <label for="todo-desc">Description</label>
-                    <input type="text" id ="todo-desc" name="description" maxlength="140" />
+                    <label for="add-desc">Description</label>
+                    <input type="text" id ="add-desc" name="description" maxlength="140" />
                 </div>
-
                 <div class="form-group">
-                    <label for="todo-cat">Category</label>
-                    <input type="text" id="todo-cat" name="category" />
+                    <label for="add-cat">Category</label>
+                    <input type="text" id="add-cat" name="category" />
                 </div>
-
                 <div class="form-group">
-                    <label for="todo-date">Due date</label>
-                    <input type="date" id="todo-date" name="duedate" />
+                    <label for="add-date">Due date</label>
+                    <input type="date" id="add-date" name="duedate" />
                 </div>
-
                 <div class="form-group">
-                    <label for="todo-prio">Priority</label>
-                    <select type="text" id="todo-prio" name="priority" required>
+                    <label for="add-prio">Priority*</label>
+                    <select type="text" id="add-prio" name="priority" required>
                         <option value="" disabled selected>Select Priority</option>
                         <option value="low">Low</option>
                         <option value="medium">Medium</option>
                         <option value="high">High</option>
                     </select>
                 </div>
-                
-                <div class="form-actions">
-                    <button type="submit" class="close-btn" formmethod="dialog" formnovalidate>Cancel</button>
-                    <button type="submit">Submit</button>
+                <button type="submit">Add Task</button>
+            </form>
+        </dialog>
+        <dialog id="edit-modal">
+            <button command="close" commandfor="edit-modal" class="close-btn">X</button>
+            <form method="dialog" id="edit-form">
+                <h3>Edit task</h3>
+                <div class="form-group">
+                    <label for="edit-title">Title*</label>
+                    <input type="text" id="edit-title" name="title" maxlength="80" required />
+                </div>
+                <div class="form-group">
+                    <label for="edit-desc">Description</label>
+                    <input type="text" id ="edit-desc" name="description" maxlength="140" />
+                </div>
+                <div class="form-group">
+                    <label for="edit-cat">Category</label>
+                    <input type="text" id="edit-cat" name="category" />
+                </div>
+                <div class="form-group">
+                    <label for="edit-date">Due date</label>
+                    <input type="date" id="edit-date" name="duedate" />
+                </div>
+                <div class="form-group">
+                    <label for="edit-prio">Priority*</label>
+                    <select type="text" id="edit-prio" name="priority" required>
+                        <option value="" disabled selected>Select Priority</option>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="edit-modal-delete" class="danger">Delete</button>
+                    <button type="submit">Save Changes</button>
                 </div>
             </form>
         </dialog>
-        <dialog id="details-modal">
-            <h2 id="details-title"></h2>
-            <p id="details-description"></p>
-            <p id="details-date"></p>
-            <p id="details-priority"></p>
-            
-            <div class="modal-actions">
-                <button id="delete-task-btn" class="danger">Delete Task</button>
-                <button id="close-details">Close</button>
-            </div>
-        </dialog>
-        
     </div>
 </body>
 </html> 
