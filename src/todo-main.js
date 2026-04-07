@@ -24,10 +24,10 @@ const defaultData = [
 
 const defaultCategories = ["Work", "Personal", "School", "Long-term"];
 
-// The library - an array of objects
+// The Library - an array of objects
 let myTodoList = [];
 
-// The factory - this is a function that RETURNS an object.
+// The Factory - this is a function that RETURNS an object.
 const todo = ({
     title, 
     description, 
@@ -48,7 +48,8 @@ const todo = ({
     };
 };
 
-// The librarian - this IS an object, it manages our [] library.
+// The Librarian - this IS an object, it manages our [] library.
+// specifically, todoManager manzges the state of our todo list object. 
 const todoManager =  {
     add: (data) => {
         const newTodo = todo(data);
@@ -80,7 +81,8 @@ const todoManager =  {
         const savedData = localStorage.getItem("myTodoList");
         let dataToLoad;
 
-        // Try to parse. If savedData is null, JSON.parse(null) is actually null (not an error).
+        // Try to parse the data in localstorage. If savedData is null, 
+        // JSON.parse(null) is actually null (not an error).
         // If savedData is "garbage" text, this line will "throw" to the catch block.
         try {
             dataToLoad = JSON.parse(savedData);
@@ -107,6 +109,19 @@ const todoManager =  {
     },
     getById: (id) => {
         return myTodoList.find(task => task.id === id);
+    },
+    update: (id, data) => {
+        const task = myTodoList.find(t => t.id = id);
+        if (task) {
+            // Rather than creating a new todo and deleting the old one, 
+            // Object.assign() instead specifically mutates the state 
+            // of an existing todo instance. This is used deliberately
+            // instead of the spread operator (ie "const newObj - {...target, ...source}" 
+            // because we actually want *mutability*. 
+            // This OOP the modern javascript way - clean and elegant!
+            Object.assign(task, data); 
+            todoManager.save();
+        }
     },
 }; 
 
