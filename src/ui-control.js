@@ -3,17 +3,21 @@ import { format, isPast, isToday, isTomorrow, isThisMonth } from 'date-fns';
 import { renderAllTodos, renderCategories } from "./render";
 
 const $sidebar = document.getElementById("sidebar");
-const $newTodoModal = document.getElementById("new-todo-modal");
-const $detailsModal = document.getElementById("details-modal");
-const $form = document.getElementById("form");
 const $mainContent = document.getElementById("content");
+const $addForm = document.getElementById("add-form");
+const $editForm = document.getElementById("edit-form")
+const $addModal = document.getElementById("add-modal");
+const $editModal = document.getElementById("edit-modal");
 
 // Initializing the HTML form with sane defaults to help validate
 // ie - preventing the user from selecting a date in the past
 function initializeFormDefaults(){
     const today = format(new Date(), 'yyyy-MM-dd');
-    const $formdate = $form.elements["duedate"]
-    $formdate.min = today;
+    const $addDate = $addForm.elements["duedate"];
+    const $editDate = $editForm.elements["duedate"];
+
+    $addDate.min = today;
+    $editDate.min = today;
 };
 
 initializeFormDefaults();
@@ -35,7 +39,7 @@ $sidebar.addEventListener("click", (e) => {
     // if not, then its one of the following static buttons
     switch (btn.id) {
         case "new-task":
-            $newTodoModal.showModal();
+            $addModal.showModal();
             break;
         case "all-tasks":
             renderAllTodos();
@@ -79,25 +83,25 @@ $sidebar.addEventListener("click", (e) => {
     }
 });
 
-// Event listener to close the modals
-function closeModal(e) { // I don't like this, needs refactor
-
-    if (e.target.closest(".close-btn, .cancel-btn")) this.close();
-};
-
-$newTodoModal.addEventListener("click", closeModal); 
-$detailsModal.addEventListener("click", closeModal);
-
-// Event listener to submit the form
-$form.addEventListener("submit", (e) => {
+$addForm.addEventListener("submit", (e) => {
     const data = Object.fromEntries(new FormData(e.target));
     todoManager.add(data);
 
     renderAllTodos();
     renderCategories();
 
-    $form.reset();
-    $newTodoModal.close();
+    $addForm.reset();
+    $addModal.close();
+});
+
+// Event listener for the edit todo form
+$editForm.addEventListener("submit", (e) => {
+    const id = e.target.dataset.id;
+    const updatedData = Object.fromEntries(new FormData(e.target));
+    todoManager.update(id, updatedData);
+
+    renderAllTodos();
+    $editModal.close();
 });
 
 // Event listener for the main content
