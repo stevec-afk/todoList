@@ -1,29 +1,27 @@
-import { todoManager } from "./todo-main";
+import { todoManager } from './todo-main';
 import { format, isPast, isToday, isTomorrow, isThisMonth } from 'date-fns';
-import { renderAllTodos, renderCategories } from "./render";
+import { renderAllTodos, renderCategories } from './render';
 
-const $sidebar = document.getElementById("sidebar");
-const $mainContent = document.getElementById("content");
-const $addForm = document.getElementById("add-form");
-const $editForm = document.getElementById("edit-form")
-const $addModal = document.getElementById("add-modal");
-const $editModal = document.getElementById("edit-modal");
+const $sidebar = document.getElementById('sidebar');
+const $mainContent = document.getElementById('content');
+const $addForm = document.getElementById('add-form');
+const $editForm = document.getElementById('edit-form')
+const $addModal = document.getElementById('add-modal');
+const $editModal = document.getElementById('edit-modal');
 
 // Initializing the HTML form with sane defaults to help validate
 // ie - preventing the user from selecting a date in the past
 function initializeFormDefaults(){
     const today = format(new Date(), 'yyyy-MM-dd');
-    const $addDate = $addForm.elements["duedate"];
-    const $editDate = $editForm.elements["duedate"];
+    const $addDate = $addForm.elements['duedate'];
 
     $addDate.min = today;
-    $editDate.min = today;
 };
 
 initializeFormDefaults();
 
 // Event listener for the sidebar
-$sidebar.addEventListener("click", (e) => {
+$sidebar.addEventListener('click', (e) => {
     const btn = e.target.closest("button");
     if (!btn) return; // Checks to make sure a button was clicked
 
@@ -83,7 +81,7 @@ $sidebar.addEventListener("click", (e) => {
     }
 });
 
-$addForm.addEventListener("submit", (e) => {
+$addForm.addEventListener('submit', (e) => {
     const data = Object.fromEntries(new FormData(e.target));
     todoManager.add(data);
 
@@ -95,7 +93,7 @@ $addForm.addEventListener("submit", (e) => {
 });
 
 // Event listener for the edit todo form
-$editForm.addEventListener("submit", (e) => {
+$editForm.addEventListener('submit', (e) => {
     const id = e.target.dataset.id;
     const updatedData = Object.fromEntries(new FormData(e.target));
     todoManager.update(id, updatedData);
@@ -105,25 +103,30 @@ $editForm.addEventListener("submit", (e) => {
 });
 
 // Event listener for the main content
-$mainContent.addEventListener("click", (e) => {
+$mainContent.addEventListener('click', (e) => {
     const $targetRow = e.target.closest('.todo-row')
     if (!$targetRow) return; // Check to make sure a todo row was clicked
 
-    const targetTodo = $targetRow.dataset.id;
+    const targetTodoId = $targetRow.dataset.id;
 
     if (e.target.type === 'checkbox') {
-        todoManager.toggleStatus(targetTodo);
+        todoManager.toggleStatus(targetTodoId);
         renderAllTodos();
     }
-    else if (e.target.classList.contains('details-btn')) {
-        const task = todoManager.getById(targetTodo);
-        const $detailsModal = document.getElementById('details-modal');
-        document.getElementById('details-title').textContent = task.title;
-        document.getElementById('details-description').textContent = task.description;
-        document.getElementById('details-date').textContent = task.duedate;
-        document.getElementById('details-priority').textContent = task.priority;
-        $detailsModal.showModal();
+    else if (e.target.closest('.delete-row-btn')) {
+        if (window.confirm('Are you sure you want to delete this task?')) {
+            todoManager.remove(targetTodoId);
+            renderAllTodos();
+        }
     }
-
-    else return; 
+    else if (e.target.closest('.details-btn')) {
+        const task = todoManager.getById(targetTodoId);
+        document.getElementById('edit-title').value = task.title;
+        document.getElementById('edit-desc').value = task.description;
+        document.getElementById('edit-cat').value = task.category;
+        document.getElementById('edit-date').value = task.duedate;
+        document.getElementById('edit-prio').value = task.priority;
+        $editForm.dataset.id = targetTodoId;
+        $editModal.showModal();
+    }
 });

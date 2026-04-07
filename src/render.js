@@ -36,11 +36,16 @@ function createTaskRow (todo) {
     // a "more details" button that will bring up a modal
     const $detailsBtn = createHtmlElement('button', '...', ['details-btn']);
 
+    const $deleteBtn = createHtmlElement('button', undefined, ['delete-row-btn']);
+    const $trashIcon = createHtmlElement('span', 'delete', ['material-icons']);
+    $deleteBtn.appendChild($trashIcon);
+
     // Append everything to the todo row from left to right
     $todoRow.appendChild($checkbox);
     $todoRow.appendChild($todoTitle);
     $todoRow.appendChild($dueDate);
     $todoRow.appendChild($detailsBtn);
+    $todoRow.appendChild($deleteBtn);
     return $todoRow;
 }
 
@@ -51,12 +56,17 @@ function renderAllTodos (todoList = todoManager.getAll()){
     if (todoList.length === 0 ){
         const $emptymsg = createHtmlElement('p', 'Nothing to do here!', ['empty-msg']);
         $mainContent.appendChild($emptymsg);
-        return;
     }
-    todoList.forEach((todo) => {
-        const $newRow = createTaskRow(todo);
-        $mainContent.appendChild($newRow);
-    });
+    else {
+        todoList.forEach((todo) => {
+            const $newRow = createTaskRow(todo);
+            $mainContent.appendChild($newRow);
+        });
+    }
+    const $newTodoButton = createHtmlElement('button', 'Add new task', ['add-task-inline']);
+    $newTodoButton.setAttribute('command', 'show-modal');
+    $newTodoButton.setAttribute('commandfor', 'add-modal');
+    $mainContent.appendChild($newTodoButton);
 }
 
 function renderCategories () {
