@@ -59,6 +59,7 @@ const todoManager =  {
     getAll: () => [...myTodoList],
     remove: (id) => { 
         myTodoList = myTodoList.filter(task => task.id !== id ); 
+        todoManager.save();
     },
     getByCategory: (category) => {
         return myTodoList.filter(task => task.category === category);
@@ -100,18 +101,20 @@ const todoManager =  {
         todoManager.init(); // re-initialize from defaults
     },
     getCategories: () => {
-        // Generates a list of categories from existing todos
-        const taskCategories = myTodoList.map(todo => todo.category);
-        // Combine the above list with the default categories
+        // Generates a list of categories from existing todos,
+        // combines it with the default categories,
+        // and then removes duplicates. 
+        const taskCategories = myTodoList
+            .map(todo => todo.category)
+            .filter(cat => cat && cat.trim() !== ""); // removes blanks
         const combined = [...defaultCategories, ...taskCategories]
-        // Return a set of unique categories with dupes removed
         return [...new Set(combined)]; 
     },
     getById: (id) => {
         return myTodoList.find(task => task.id === id);
     },
     update: (id, data) => {
-        const task = myTodoList.find(t => t.id = id);
+        const task = myTodoList.find(t => t.id === id);
         if (task) {
             // Rather than creating a new todo and deleting the old one, 
             // Object.assign() instead specifically mutates the state 

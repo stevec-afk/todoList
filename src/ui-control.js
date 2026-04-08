@@ -14,7 +14,6 @@ const $editModal = document.getElementById('edit-modal');
 function initializeFormDefaults(){
     const today = format(new Date(), 'yyyy-MM-dd');
     const $addDate = $addForm.elements['duedate'];
-
     $addDate.min = today;
 };
 
@@ -31,7 +30,7 @@ $sidebar.addEventListener('click', (e) => {
     if (selectedFilter) {
         const filtered = todoManager.getByCategory(selectedFilter);
         renderAllTodos(filtered);
-        return; 
+        return;
     }
 
     // if not, then its one of the following static buttons
@@ -76,6 +75,7 @@ $sidebar.addEventListener('click', (e) => {
                 todoManager.resetApp();
                 console.log("Current Tasks:", todoManager.getAll());
                 renderAllTodos();
+                renderCategories();
             }
             break;
     }
@@ -83,6 +83,8 @@ $sidebar.addEventListener('click', (e) => {
 
 $addForm.addEventListener('submit', (e) => {
     const data = Object.fromEntries(new FormData(e.target));
+    if (data.category) data.category = data.category.trim(); // filters blanks
+
     todoManager.add(data);
 
     renderAllTodos();
@@ -96,9 +98,12 @@ $addForm.addEventListener('submit', (e) => {
 $editForm.addEventListener('submit', (e) => {
     const id = e.target.dataset.id;
     const updatedData = Object.fromEntries(new FormData(e.target));
+    if (updatedData.category) updatedData.category = updatedData.category.trim()
+
     todoManager.update(id, updatedData);
 
     renderAllTodos();
+    renderCategories();
     $editModal.close();
 });
 
@@ -117,9 +122,12 @@ $mainContent.addEventListener('click', (e) => {
         if (window.confirm('Are you sure you want to delete this task?')) {
             todoManager.remove(targetTodoId);
             renderAllTodos();
+            renderCategories();
         }
     }
     else if (e.target.closest('.details-btn')) {
+        $editForm.reset(); // Reset the edit form
+
         const task = todoManager.getById(targetTodoId);
         document.getElementById('edit-title').value = task.title;
         document.getElementById('edit-desc').value = task.description;

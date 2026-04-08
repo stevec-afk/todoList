@@ -10,11 +10,6 @@ function createHtmlElement (type, content, classes, id){
     
     return element;
 }
-
-function clearContent () {
-    $mainContent.innerHTML = '';
-}
-
 // Create a row on the DOM for 1 todo element
 function createTaskRow (todo) {
     // Create a container for 1 todo
@@ -50,7 +45,7 @@ function createTaskRow (todo) {
 }
 
 function renderAllTodos (todoList = todoManager.getAll()){
-    clearContent();
+    $mainContent.innerHTML = '';
 
     // If the todo list is empty, show the empty message.
     if (todoList.length === 0 ){
@@ -81,4 +76,4 @@ function renderCategories () {
     });
 }
 
-export { clearContent, renderAllTodos, renderCategories };
+export { renderAllTodos, renderCategories };
