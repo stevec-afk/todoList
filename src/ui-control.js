@@ -1,6 +1,7 @@
-import { todoManager } from './todo-main';
 import { format, isPast, isToday, isTomorrow, isThisMonth } from 'date-fns';
-import { renderAllTodos, renderCategories } from './render';
+import { todoManager } from './todo-main';
+import { settingsManager } from './settings';
+import { renderTodos, renderCategories } from './render';
 
 const $sidebar = document.getElementById('sidebar');
 const $mainContent = document.getElementById('content');
@@ -9,6 +10,56 @@ const $editForm = document.getElementById('edit-form')
 const $addModal = document.getElementById('add-modal');
 const $editModal = document.getElementById('edit-modal');
 
+// The date view map - this defines the logic for the date filters
+const dateFilter = {
+    'due-today': (list) => {
+        return list.filter(t => {
+            if (!t.duedate) return false;
+            const date = new Date(t.duedate);
+            return isToday(date) || isPast(date);
+        });
+    },
+
+    'due-tomorrow': (list) => {
+        return list.filter(t => {
+            if (!t.duedate) return false;
+            return isTomorrow(new Date(t.duedate));
+        });
+    },
+
+    'due-month': (list) => {
+        return list.filter(t => {
+            if (!t.duedate) return false;
+            return isThisMonth(new Date(t.duedate));
+        });
+    },
+
+    'no-due-date': (list) => list.filter(t => !t.duedate),
+};
+
+// The UI coordinator - applies filters and then refreshes the UI
+function refreshUI() {
+    const { currentView, showCompleted } = settingsManager.getPrefs();
+    const allTodos = todoManager.getAll();
+    let filteredTodos = [];
+
+    if (currentView === 'all-tasks') {
+        filteredTodos = allTodos;
+    }
+    else if (dateFilter[currentView]) { // if current view is a date filter
+        filteredTodos = dateFilter[currentView](allTodos);
+    }
+    else { // if current view is a category filter
+        filteredTodos = todoManager.getByCategory(currentView); 
+    }
+
+    if (!showCompleted) { // if showCompleted box is toggled
+        filteredTodos = filteredTodos.filter(t => !t.status);
+    }
+
+    renderTodos(filteredTodos);
+}
+
 // Initializing the HTML form with sane defaults to help validate
 // ie - preventing the user from selecting a date in the past
 function initializeFormDefaults(){
@@ -16,94 +67,57 @@ function initializeFormDefaults(){
     const $addDate = $addForm.elements['duedate'];
     $addDate.min = today;
 };
-
 initializeFormDefaults();
 
 // Event listener for the sidebar
 $sidebar.addEventListener('click', (e) => {
-    const btn = e.target.closest("button");
+    const btn = e.target.closest('button');
     if (!btn) return; // Checks to make sure a button was clicked
-
-    const selectedFilter = btn.dataset.category;
-
-    // Check if button is for a category filter & apply filter
-    if (selectedFilter) {
-        const filtered = todoManager.getByCategory(selectedFilter);
-        renderAllTodos(filtered);
+    
+    if (btn.id === 'new-task') {
+        $addModal.showModal();
+        return;
+    }
+    if(btn.id === 'reset') {
+        console.log('Reset clicked!');
+        if (confirm('Nuke everything and restore defaults?')) {
+            todoManager.resetApp();
+            console.log('Current Tasks:', todoManager.getAll());
+            renderCategories();
+            refreshUI();
+        }
         return;
     }
 
-    // if not, then its one of the following static buttons
-    switch (btn.id) {
-        case "new-task":
-            $addModal.showModal();
-            break;
-        case "all-tasks":
-            renderAllTodos();
-            break;
-        case "no-due-date":
-            const noDateTasks = todoManager.getAll().filter(t => t.duedate === "");
-            renderAllTodos(noDateTasks);
-            break;
-        case "due-today":
-            const todayAndOverdue = todoManager.getAll().filter(t => {
-                if (!t.duedate) return false; // Skip tasks with no date
-                const date = new Date(t.duedate);
-                return isToday(date) || isPast(date);
-            });
-            renderAllTodos(todayAndOverdue);
-            break;
-        case "due-tomorrow":
-            const tomorrowTasks = todoManager.getAll().filter(t => {
-                if (!t.duedate) return false;
-                const date = new Date(t.duedate);
-                return isTomorrow(date);
-            });
-            renderAllTodos(tomorrowTasks);
-            break;
-        case "due-month":
-            const monthTasks = todoManager.getAll().filter(t => {
-                if (!t.duedate) return false;
-                const date = new Date(t.duedate);
-                return isThisMonth(date);
-            });
-            renderAllTodos(monthTasks);
-            break;
-        case "reset":
-            console.log("Reset clicked!");
-            if (confirm("Nuke everything and restore defaults?")) {
-                todoManager.resetApp();
-                console.log("Current Tasks:", todoManager.getAll());
-                renderAllTodos();
-                renderCategories();
-            }
-            break;
-    }
+    // Udpate the current view with either category, or button ID, 
+    // depending on what was clicked. If category does not exist, use ID instead. 
+    // Assumes that if a button has a category & ID, we are using the category.
+    settingsManager.update('currentView', btn.dataset.category || btn.id);
+    refreshUI();
 });
 
+// Event listener for the 'add new todo' form
 $addForm.addEventListener('submit', (e) => {
     const data = Object.fromEntries(new FormData(e.target));
     if (data.category) data.category = data.category.trim(); // filters blanks
 
     todoManager.add(data);
-
-    renderAllTodos();
     renderCategories();
+    refreshUI();
 
     $addForm.reset();
     $addModal.close();
 });
 
-// Event listener for the edit todo form
+// Event listener for the 'edit todo' form
 $editForm.addEventListener('submit', (e) => {
     const id = e.target.dataset.id;
     const updatedData = Object.fromEntries(new FormData(e.target));
     if (updatedData.category) updatedData.category = updatedData.category.trim()
 
     todoManager.update(id, updatedData);
-
-    renderAllTodos();
     renderCategories();
+    refreshUI();
     $editModal.close();
 });
 
@@ -116,12 +130,12 @@ $mainContent.addEventListener('click', (e) => {
 
     if (e.target.type === 'checkbox') {
         todoManager.toggleStatus(targetTodoId);
-        renderAllTodos();
+        refreshUI();
     }
     else if (e.target.closest('.delete-row-btn')) {
         if (window.confirm('Are you sure you want to delete this task?')) {
             todoManager.remove(targetTodoId);
-            renderAllTodos();
+            refreshUI();
             renderCategories();
         }
     }
@@ -138,3 +152,5 @@ $mainContent.addEventListener('click', (e) => {
         $editModal.showModal();
     }
 });
+
+export { refreshUI };

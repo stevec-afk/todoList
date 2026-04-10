@@ -1,7 +1,8 @@
 let preferences = {
     showCompleted: true,
     darkMode: false,
-    sidebarCollapsed: false
+    sidebarCollapsed: false,
+    currentView: 'all-tasks'
 };
 
 const settingsManager = {
@@ -11,7 +12,7 @@ const settingsManager = {
             preferences = JSON.parse(saved);
         }
     },
-    getPerfs: () => ({ ...preferences }),
+    getPrefs: () => ({ ...preferences }),
     update: (key, value) => {
         if (key in preferences) {
             preferences[key] = value;

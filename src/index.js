@@ -1,12 +1,12 @@
 import "./styles.css";
 import { todoManager } from "./todo-main";
-import './ui-control.js'
-import { renderAllTodos, renderCategories } from "./render.js"
+import { settingsManager } from "./settings.js"
+import { refreshUI } from './ui-control.js'
+import { renderCategories } from "./render.js"
 
-
-
+settingsManager.init();
 todoManager.init();
-renderAllTodos();
+refreshUI();
 renderCategories();
 
 console.log("Current Tasks:", todoManager.getAll());

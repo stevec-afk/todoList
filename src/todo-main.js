@@ -120,8 +120,8 @@ const todoManager =  {
             // Object.assign() instead specifically mutates the state 
             // of an existing todo instance. This is used deliberately
             // instead of the spread operator (ie "const newObj - {...target, ...source}" 
-            // because we actually want *mutability*. 
-            // This OOP the modern javascript way - clean and elegant!
+            // because we actually *want* mutability. 
+            // We are editing an existing todo, not deleting and recreating it! 
             Object.assign(task, data); 
             todoManager.save();
         }
