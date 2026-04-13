@@ -69,6 +69,13 @@ function initializeFormDefaults(){
 };
 initializeFormDefaults();
 
+// Helper function to toggle the theme - update me. 
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', targetTheme);
+}
+
 // Event listener for the sidebar
 $sidebar.addEventListener('click', (e) => {
     const btn = e.target.closest('button');

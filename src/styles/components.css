@@ -1,0 +1,50 @@
+#new-task {
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    padding: 12px 20px;
+    margin: 0 20px 20px 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.sidebar-container button {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 10px 25px;
+    text-align: left;
+    color: var(--text-main);
+    cursor: pointer;
+}
+
+.todo-item {
+    background-color: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    gap: 15px;
+}
+
+.todo-item.completed {
+    opacity: 0.5;
+    text-decoration: line-through;
+}
+
+dialog {
+    margin: auto;
+    padding: 2rem;
+    border: none;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    background-color: var(--bg-sidebar);
+    color: var(--text-main);
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+}

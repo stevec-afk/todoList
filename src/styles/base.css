@@ -1,0 +1,50 @@
+@import '~material-icons/iconfont/material-icons.css';
+
+:root {
+    /* Light Mode (Soft Minimalist / GDA-inspired) */
+    --bg-main: #f4f7f6;
+    --bg-sidebar: #ffffff;
+    --bg-card: #ffffff;
+    --text-main: #2d3436;
+    --text-muted: #636e72;
+    --accent: #5d8aa8;
+    --accent-hover: #4a6e8a;
+    --border: #e1e8ed;
+
+    /* Priority Colors */
+    --priority-high: #ff7675;
+    --priority-med: #fab1a0;
+    --priority-low: #55efc4;
+
+    /* Shadows & Radius */
+    --shadow: 0 2px 5px rgba(0,0,0,0.05);
+    --radius: 8px;
+    --transition: all 0.3s ease;
+}
+
+/* 2. Dark Mode Override */
+[data-theme='dark'] {
+    --bg-main: #121212;
+    --bg-sidebar: #1e1e1e;
+    --bg-card: #252525;
+    --text-main: #e0e0e0;
+    --text-muted: #b0b0b0;
+    --border: #333333;
+    --shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+*, *:before, *:after {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: 'League Spartan', sans-serif;
+    transition: var(--transition);
+}
+
+button * {
+    pointer-events: none;
+}

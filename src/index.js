@@ -1,4 +1,6 @@
-import "./styles.css";
+import './styles/base.css';
+import './styles/layout.css';
+import './styles/components.css';
 import { todoManager } from "./todo-main";
 import { settingsManager } from "./settings.js"
 import { refreshUI } from './ui-control.js'

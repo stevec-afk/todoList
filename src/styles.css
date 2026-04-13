@@ -1,5 +1,38 @@
 @import '~material-icons/iconfont/material-icons.css';
 
+:root {
+    /* Light Mode (Soft Minimalist / GDA-inspired) */
+    --bg-main: #f4f7f6;           /* Very light minty grey */
+    --bg-sidebar: #ffffff;        /* Clean white sidebar */
+    --bg-card: #ffffff;           /* Task rows */
+    --text-main: #2d3436;         /* Soft charcoal */
+    --text-muted: #636e72;        /* Grey for dates/details */
+    --accent: #5d8aa8;            /* The "GDA" Blue */
+    --accent-hover: #4a6e8a;
+    --border: #e1e8ed;            /* Subtle separators */
+
+    /* Priority Colors */
+    --priority-high: #ff7675;     /* Soft Red */
+    --priority-med: #fab1a0;      /* Soft Orange */
+    --priority-low: #55efc4;      /* Soft Green */
+
+    /* Shadows & Radius */
+    --shadow: 0 2px 5px rgba(0,0,0,0.05);
+    --radius: 8px;
+    --transition: all 0.3s ease;
+}
+
+/* 2. Dark Mode Override */
+[data-theme='dark'] {
+    --bg-main: #121212;
+   --bg-sidebar: #1e1e1e;
+   --bg-card: #252525;
+   --text-main: #e0e0e0;
+   --text-muted: #b0b0b0;
+   --border: #333333;
+   --shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
 html {
     box-sizing: border-box;
 }
@@ -8,6 +41,14 @@ html {
     box-sizing: inherit;
     margin: 0;
 }
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: 'League Spartan', sans-serif;
+    transition: var(--transition); /* Smoothly fades colors when switching themes */
+}
+  
 
 button {
     /* button styles here */ 
@@ -18,16 +59,16 @@ button {
     }
 }
 
-#sidebar { 
-    position: fixed;
-    inset: 0 auto 0 0;
-    width: 250px;
-    height: 100%;
-    z-index: 999; 
-    transform: translateX(-100%);
-    transition: transform 0.3s ease-in-out;
+#sidebar {
+    background-color: var(--bg-sidebar);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    width: 260px;
+    height: 100vh;
+    transition: var(--transition);
 }
-
 #sidebar.active {
     transform: translateX(0);
 }
@@ -39,6 +80,79 @@ button {
     flex-direction: column;
     padding: 20px;
     gap: 10px;
+}
+
+#new-task {
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    padding: 12px 20px;
+    margin: 0 20px 20px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: var(--transition);
+}
+
+#new-task:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-1px);
+}
+
+.sidebar-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-container button {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 10px 25px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-family: 'League Spartan', sans-serif;
+    font-size: 1rem;
+    color: var(--text-main);
+    text-align: left;
+    transition: background 0.2s ease;
+}
+
+.sidebar-container button:hover {
+    background-color: rgba(93, 138, 168, 0.1);
+}
+
+#side-footer {
+    margin-top: auto; /* Pushes footer to the bottom */
+    padding: 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    white-space: nowrap;
+    gap: 10px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+#reset {
+    background: none;
+    border: 1px solid var(--priority-high);
+    color: var(--priority-high);
+    padding: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.75rem;
+}
+
+#reset:hover {
+    background-color: var(--priority-high);
+    color: white;
 }
 
 #header {
@@ -53,16 +167,25 @@ button {
     gap: 15px;
 }
 
-#side-footer {
-    display: flex;
-    flex-direction: column;
-    margin-top: auto;
-    white-space: nowrap;
+/* The Compact Task Row */
+.todo-item {
+  background-color: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  gap: 15px;
+  transition: var(--transition);
 }
 
-.sidebar-container {
-    display: flex;
-    flex-direction: column;
+.todo-item:hover {
+  background-color: rgba(93, 138, 168, 0.05); /* Very subtle blue tint on hover */
+}
+
+/* The "Fade-out" for Completed tasks */
+.todo-item.completed {
+  opacity: 0.5;
+  filter: grayscale(0.5);
 }
 
 /* This targets the <dialog> element itself */
