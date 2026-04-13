@@ -118,7 +118,7 @@ form h3 {
     margin-top: 10px;
 }
 
-/* Close Button (The X) */
+/* Modal close Button */
 .close-btn {
     position: absolute;
     top: 10px;
@@ -152,7 +152,7 @@ form h3 {
     background-color: rgba(93, 138, 168, 0.03);
 }
 
-/* Priority Indicators (Assuming your JS adds 'high', 'medium', or 'low' to the row) */
+/* Priority Indicators */
 .todo-row.high { border-left: 4px solid var(--priority-high); }
 .todo-row.medium { border-left: 4px solid var(--priority-med); }
 .todo-row.low { border-left: 4px solid var(--priority-low); }
@@ -165,13 +165,13 @@ form h3 {
     height: 18px;
 }
 
-.task-title { /* The Title */
+.task-title {
     flex-grow: 1;
     font-size: 1.05rem;
     color: var(--text-main);
 }
 
-.task-date { /* The Due Date */
+.task-date {
     font-size: 0.85rem;
     color: var(--text-muted);
     min-width: 100px;

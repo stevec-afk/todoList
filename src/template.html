@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;700&amp;family=Sacramento&amp;display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="preload">
     <div id="main-container">
         <aside id="sidebar">
             <div id="title"> 
@@ -36,7 +36,14 @@
             </div>
         </aside>
         <div id="header">
-            <h2 id="current-view-title"> Current view </h2>
+            <div class="header-left">
+                <button id="menu-toggle" class="material-icons">menu</button>
+                <h2 id="view-title">All Tasks</h2> <!-- This is your dynamic target -->
+            </div>
+            <div class="header-right">
+                <button id="toggle-completed" class="material-icons" title="Toggle Completed">visibility</button>
+                <button id="theme-toggle" class="material-icons" title="Toggle Dark Mode">dark_mode</button>
+            </div>
         </div>
         <main id="content">
         </main>

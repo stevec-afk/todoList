@@ -11,4 +11,8 @@ todoManager.init();
 refreshUI();
 renderCategories();
 
+window.addEventListener('load', () => {
+    document.body.classList.remove('preload');
+});
+
 console.log("Current Tasks:", todoManager.getAll());
