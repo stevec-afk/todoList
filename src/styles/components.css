@@ -48,3 +48,186 @@ dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(3px);
 }
+
+/* Target both dialogs */
+#add-modal, #edit-modal {
+    background-color: var(--bg-sidebar);
+    color: var(--text-main);
+    border: none;
+    border-radius: var(--radius);
+    padding: 30px;
+    width: 90%;
+    max-width: 400px;
+}
+
+/* Modal Title */
+form h3 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: var(--accent);
+}
+
+/* Space out the form groups */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+/* Label styling */
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+/* Shared Input & Select Styling */
+.form-group input,
+.form-group select {
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+/* Soft Focus State */
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+/* Specific button styling inside forms */
+#add-form button[type="submit"],
+#edit-form button[type="submit"] {
+    width: 100%;
+    background-color: var(--accent);
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: var(--radius);
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* Close Button (The X) */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-weight: 700;
+}
+
+#content {
+    padding: 30px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px; /* Tight vertical rhythm */
+}
+
+/* The horizontal todo row */
+.todo-row {
+    background-color: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    gap: 15px;
+    transition: var(--transition);
+}
+
+.todo-row:hover {
+    background-color: rgba(93, 138, 168, 0.03);
+}
+
+/* Priority Indicators (Assuming your JS adds 'high', 'medium', or 'low' to the row) */
+.todo-row.high { border-left: 4px solid var(--priority-high); }
+.todo-row.medium { border-left: 4px solid var(--priority-med); }
+.todo-row.low { border-left: 4px solid var(--priority-low); }
+
+/* Elements within the row */
+.todo-row input[type="checkbox"] {
+    cursor: pointer;
+    accent-color: var(--accent);
+    width: 18px;
+    height: 18px;
+}
+
+.task-title { /* The Title */
+    flex-grow: 1;
+    font-size: 1.05rem;
+    color: var(--text-main);
+}
+
+.task-date { /* The Due Date */
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    min-width: 100px;
+    text-align: right;
+}
+
+/* Action Buttons */
+.details-btn, 
+.delete-row-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 4px;
+    transition: var(--transition);
+}
+
+.details-btn:hover { color: var(--accent); }
+.delete-row-btn:hover .material-icons { 
+    color: var(--priority-high);
+}
+
+/* The "Add New Task" row button at the bottom */
+.add-task-inline {
+    background: none;
+    border: 1px dashed var(--border);
+    color: var(--text-muted);
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.add-task-inline:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background-color: rgba(93, 138, 168, 0.05);
+}
+
+/* Completion style */
+.completed {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+/* Empty State */
+.empty-msg {
+    color: var(--text-muted);
+    text-align: center;
+    padding: 40px;
+    font-style: italic;
+}

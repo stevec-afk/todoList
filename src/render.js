@@ -12,7 +12,8 @@ function createHtmlElement (type, content, classes, id){
 }
 // Helper for creating a row on the DOM for 1 todo element
 function createTaskRow (todo) {
-    const $todoRow = createHtmlElement('div', undefined, ['todo-row']);
+    const priorityClass = `prio-${todo.priority}`
+    const $todoRow = createHtmlElement('div', undefined, ['todo-row', priorityClass]);
     $todoRow.dataset.id = todo.id; // Attach the todo ID to the container
 
     // Add input checkbox for todo.status
@@ -21,11 +22,11 @@ function createTaskRow (todo) {
     $checkbox.checked = todo.status;
 
     // If the todo is completed, add a CSS class for strikethough text
-    const $todoTitle = createHtmlElement('span', todo.title);
+    const $todoTitle = createHtmlElement('span', todo.title, ['task-title']);
     if (todo.status === true) $todoTitle.classList.add('completed');
 
     // Create the rest of the elements for the todo
-    const $dueDate = createHtmlElement('span', todo.duedate);
+    const $dueDate = createHtmlElement('span', todo.duedate, ['task-date']);
     const $detailsBtn = createHtmlElement('button', '...', ['details-btn']);
     const $deleteBtn = createHtmlElement('button', undefined, ['delete-row-btn']);
     const $trashIcon = createHtmlElement('span', 'delete', ['material-icons']);
