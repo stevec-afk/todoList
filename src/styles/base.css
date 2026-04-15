@@ -2,8 +2,8 @@
 
 :root {
     /* Light Mode (Soft Minimalist / GDA-inspired) */
-    --bg-main: #f4f7f6;
-    --bg-sidebar: #ffffff;
+    --bg-main: #ffffff;
+    --bg-sidebar: #f4f7f6;
     --bg-card: #ffffff;
     --text-main: #2d3436;
     --text-muted: #636e72;

@@ -25,6 +25,20 @@
     box-shadow: 5px 0 15px rgba(0,0,0,0.1);
 }
 
+/* Sidebar container for the toggleable options */ 
+.sidebar-options {
+    border-top: 2px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: auto;
+}
+
+#title {
+    font-size: 2rem;
+    margin: 8px;
+}
+
 #header {
     height: 70px;
     padding: 0 20px;
@@ -35,8 +49,19 @@
     border-bottom: 1px solid var(--border);
 }
 
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
 #menu-toggle {
     display: block; /* Visible by default on mobile */
+    margin: 10px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 2rem;
+    padding-bottom: 5px;
 }
 
 #content {
@@ -59,6 +84,7 @@
         transform: translateX(0); /* Always visible */
         grid-area: side;
         width: auto;
+        padding: 16px;
     }
 
     #header {
@@ -71,7 +97,7 @@
         padding: 40px;
     }
 
-    #menu-toggle {
+    #menu-toggle, #toggle-completed, #theme-toggle {
         display: none; /* Hide hamburger on desktop */
     }
 }

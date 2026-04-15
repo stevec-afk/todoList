@@ -123,10 +123,6 @@ button {
     transition: background 0.2s ease;
 }
 
-.sidebar-container button:hover {
-    background-color: rgba(93, 138, 168, 0.1);
-}
-
 #side-footer {
     margin-top: auto; /* Pushes footer to the bottom */
     padding: 20px;

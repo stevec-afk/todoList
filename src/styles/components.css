@@ -1,14 +1,4 @@
-#new-task {
-    background-color: var(--accent);
-    color: white;
-    border: none;
-    border-radius: var(--radius);
-    padding: 12px 20px;
-    margin: 0 20px 20px 20px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition);
-}
+/* Sidebar buttons */
 
 .sidebar-container button {
     width: 100%;
@@ -20,19 +10,100 @@
     cursor: pointer;
 }
 
-.todo-item {
-    background-color: var(--bg-card);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    padding: 12px 20px;
-    gap: 15px;
+.sidebar-container button:hover {
+    background-color: rgba(93, 138, 168, 0.1);
 }
 
-.todo-item.completed {
-    opacity: 0.5;
-    text-decoration: line-through;
+/* Sidebar toggle switches */ 
+
+.toggle-container {
+    display: flex;
+    align-items: center;
+    font-size: 1.2em;
 }
+
+.switch {
+  position: relative;
+  display: inline-block;
+  margin: 10px 5px 5px;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 34px;
+  background-color: #ccc;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  border-radius: 50%;
+  background-color: white;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Sidebar footer */
+
+#side-footer {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    white-space: nowrap;
+    gap: 10px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+#reset {
+    background-color: var(--priority-high);
+    border: 1px solid var(--priority-high);
+    color: white;
+    padding: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.75rem;
+}
+
+#reset:hover {
+    background: none;
+    color: var(--priority-high);
+}
+
+/* Modals & forms */
 
 dialog {
     margin: auto;
@@ -49,7 +120,6 @@ dialog::backdrop {
     backdrop-filter: blur(3px);
 }
 
-/* Target both dialogs */
 #add-modal, #edit-modal {
     background-color: var(--bg-sidebar);
     color: var(--text-main);
@@ -60,14 +130,12 @@ dialog::backdrop {
     max-width: 400px;
 }
 
-/* Modal Title */
 form h3 {
     margin-bottom: 20px;
     font-size: 1.5rem;
     color: var(--accent);
 }
 
-/* Space out the form groups */
 .form-group {
     display: flex;
     flex-direction: column;
@@ -75,7 +143,6 @@ form h3 {
     margin-bottom: 15px;
 }
 
-/* Label styling */
 .form-group label {
     font-size: 0.85rem;
     font-weight: 700;
@@ -83,7 +150,6 @@ form h3 {
     color: var(--text-muted);
 }
 
-/* Shared Input & Select Styling */
 .form-group input,
 .form-group select {
     padding: 10px;
@@ -96,14 +162,12 @@ form h3 {
     transition: border-color 0.2s;
 }
 
-/* Soft Focus State */
 .form-group input:focus,
 .form-group select:focus {
     outline: none;
     border-color: var(--accent);
 }
 
-/* Specific button styling inside forms */
 #add-form button[type="submit"],
 #edit-form button[type="submit"] {
     width: 100%;
@@ -118,7 +182,6 @@ form h3 {
     margin-top: 10px;
 }
 
-/* Modal close Button */
 .close-btn {
     position: absolute;
     top: 10px;
@@ -130,14 +193,29 @@ form h3 {
     font-weight: 700;
 }
 
+/* Main content */
+
+.todo-item {
+    background-color: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    gap: 15px;
+}
+
+.todo-item.completed {
+    opacity: 0.5;
+    text-decoration: line-through;
+}
+
 #content {
     padding: 30px 40px;
     display: flex;
     flex-direction: column;
-    gap: 2px; /* Tight vertical rhythm */
+    gap: 2px; 
 }
 
-/* The horizontal todo row */
 .todo-row {
     background-color: var(--bg-card);
     border-bottom: 1px solid var(--border);
@@ -153,11 +231,10 @@ form h3 {
 }
 
 /* Priority Indicators */
-.todo-row.high { border-left: 4px solid var(--priority-high); }
-.todo-row.medium { border-left: 4px solid var(--priority-med); }
-.todo-row.low { border-left: 4px solid var(--priority-low); }
+.todo-row.prio-high { border-left: 4px solid var(--priority-high); }
+.todo-row.prio-medium { border-left: 4px solid var(--priority-med); }
+.todo-row.prio-low { border-left: 4px solid var(--priority-low); }
 
-/* Elements within the row */
 .todo-row input[type="checkbox"] {
     cursor: pointer;
     accent-color: var(--accent);
@@ -198,11 +275,11 @@ form h3 {
     color: var(--priority-high);
 }
 
-/* The "Add New Task" row button at the bottom */
 .add-task-inline {
     background: none;
-    border: 1px dashed var(--border);
+    border: 1px dashed;
     color: var(--text-muted);
+    width: fit-content;
     padding: 12px;
     margin-top: 10px;
     border-radius: var(--radius);
@@ -213,18 +290,15 @@ form h3 {
 }
 
 .add-task-inline:hover {
-    border-color: var(--accent);
     color: var(--accent);
     background-color: rgba(93, 138, 168, 0.05);
 }
 
-/* Completion style */
 .completed {
     text-decoration: line-through;
     opacity: 0.6;
 }
 
-/* Empty State */
 .empty-msg {
     color: var(--text-muted);
     text-align: center;

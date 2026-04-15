@@ -14,10 +14,10 @@
     <div id="main-container">
         <aside id="sidebar">
             <div id="title"> 
-                ToDo List
+                <span class='material-icons'>checklist</span>
+                <span>ToDo List</span>
             </div>
             <div id="sidebar-main">
-                <button id="new-task">Add Task</button>
                 <div class="sidebar-container"> 
                     <button id="all-tasks" data-category="all-tasks">All Tasks</button>
                     <button id="no-due-date">No Due Date</button>
@@ -30,15 +30,31 @@
                 <div class="sidebar-container" id="categories">
                 </div>
             </div>
+            <div class="sidebar-options">
+                <label class="toggle-container">
+                    <span class="label-text">Show completed</span>
+                    <div class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </div>
+                </label>
+                <label class="toggle-container">
+                    <span class="label-text">Dark mode</span>
+                    <div class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </div>
+                </label>
+            </div>
             <div id="side-footer">
-                <button id="reset">⚠️Reset all data⚠️</button>
+                <button id="reset">⚠️ Reset the app ⚠️</button>
                 <span> Steve C | source </span>
             </div>
         </aside>
         <div id="header">
             <div class="header-left">
                 <button id="menu-toggle" class="material-icons">menu</button>
-                <h2 id="view-title">All Tasks</h2> <!-- This is your dynamic target -->
+                <h2 id="view-title">All Tasks</h2>
             </div>
             <div class="header-right">
                 <button id="toggle-completed" class="material-icons" title="Toggle Completed">visibility</button>
