@@ -19,15 +19,15 @@
 .toggle-container {
     display: flex;
     align-items: center;
-    font-size: 1.2em;
+
 }
 
 .switch {
   position: relative;
   display: inline-block;
   margin: 10px 5px 5px;
-  width: 60px;
-  height: 34px;
+  width: 30px;
+  height: 17px;
 }
 
 .switch input {
@@ -52,10 +52,10 @@
 .slider:before {
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
+  height: 13px;
+  width: 13px;
+  left: 2px;
+  bottom: 2px;
   border-radius: 50%;
   background-color: white;
   -webkit-transition: .2s;
@@ -71,9 +71,9 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+  -webkit-transform: translateX(13px);
+  -ms-transform: translateX(13px);
+  transform: translateX(13px);
 }
 
 /* Sidebar footer */
@@ -106,13 +106,20 @@ input:checked + .slider:before {
 /* Modals & forms */
 
 dialog {
-    margin: auto;
+    margin: 20px auto;
     padding: 2rem;
     border: none;
     border-radius: 12px;
     box-shadow: var(--shadow);
     background-color: var(--bg-sidebar);
     color: var(--text-main);
+}
+
+@media (min-width: 768px) {
+    /* Centers modal on desktop view */
+    dialog {
+        margin: auto;
+    }
 }
 
 dialog::backdrop {
@@ -195,6 +202,10 @@ form h3 {
 
 /* Main content */
 
+#current-view {
+    padding-bottom: 30px;
+}
+
 .todo-item {
     background-color: var(--bg-card);
     border-bottom: 1px solid var(--border);
@@ -213,7 +224,6 @@ form h3 {
     padding: 30px 40px;
     display: flex;
     flex-direction: column;
-    gap: 2px; 
 }
 
 .todo-row {
@@ -224,6 +234,10 @@ form h3 {
     padding: 10px 15px;
     gap: 15px;
     transition: var(--transition);
+}
+
+#content .todo-row:nth-of-type(1) {
+    border-top: 1px solid var(--border);
 }
 
 .todo-row:hover {

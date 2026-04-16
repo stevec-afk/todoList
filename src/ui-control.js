@@ -66,7 +66,7 @@ function initializeFormDefaults(){
     const today = format(new Date(), 'yyyy-MM-dd');
     const $addDate = $addForm.elements['duedate'];
     $addDate.min = today;
-};
+}
 initializeFormDefaults();
 
 // Helper function to toggle the theme - update me. 

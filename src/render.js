@@ -1,4 +1,5 @@
 import { todoManager } from "./todo-main";
+import { settingsManager } from './settings';
 
 const $mainContent = document.getElementById('content');
 
@@ -37,25 +38,61 @@ function createTaskRow (todo) {
     return $todoRow;
 }
 
+// Updates the currrent view using the UI state saved in settingsManager
+// Also maps the currentView name to the appropriate human readable string
+function updateView() {
+    const { currentView } = settingsManager.getPrefs();
+    let mappedView = '';
+
+    switch (currentView) {
+        case 'all-tasks':
+            mappedView = 'All Tasks'
+            break
+        case 'due-today':
+            mappedView = 'Due Today';
+            break
+        case 'due-tomorrow':
+            mappedView = 'Due Tomorrow';
+            break
+        case 'due-month':
+            mappedView = 'Due This Month';
+            break
+        case 'no-due-date':
+            mappedView = 'No Due Date';
+            break
+        default:
+            mappedView = currentView;
+    }
+
+    const $viewContainer = createHtmlElement('h2', mappedView, undefined, 'current-view');
+    $mainContent.appendChild($viewContainer);
+
+}
+
 // This "dumb" function ONLY accepts a list of todos and renders them
 // This function does not make decisions, it only renders. 
 function renderTodos (todoList){
     $mainContent.innerHTML = ''; // Clean slate
+    updateView(); 
+    const $newTodoButton = createHtmlElement('button', 'Add new task', ['add-task-inline']);
 
     if (todoList.length === 0 ){ // Check for empty list
         const $emptymsg = createHtmlElement('p', 'Nothing to do here!', ['empty-msg']);
         $mainContent.appendChild($emptymsg);
+        $mainContent.appendChild($newTodoButton);
+        return;
     } else {
-        todoList.forEach((todo) => {
+          todoList.forEach((todo) => {
             const $newRow = createTaskRow(todo);
             $mainContent.appendChild($newRow);
         });
     }
     // Add an additional "new todo" button at the bottom of the list. 
-    const $newTodoButton = createHtmlElement('button', 'Add new task', ['add-task-inline']);
+    const $newTodoRow = createHtmlElement('div', undefined, undefined, 'new-todo-row');
     $newTodoButton.setAttribute('command', 'show-modal');
     $newTodoButton.setAttribute('commandfor', 'add-modal');
-    $mainContent.appendChild($newTodoButton);
+    $newTodoRow.appendChild($newTodoButton);
+    $mainContent.appendChild($newTodoRow);
 }
 
 // Dynamically renders the category buttons based on which categories exist. 

@@ -13,12 +13,9 @@
 <body class="preload">
     <div id="main-container">
         <aside id="sidebar">
-            <div id="title"> 
-                <span class='material-icons'>checklist</span>
-                <span>ToDo List</span>
-            </div>
             <div id="sidebar-main">
                 <div class="sidebar-container"> 
+                    <h3>Filters</h3>
                     <button id="all-tasks" data-category="all-tasks">All Tasks</button>
                     <button id="no-due-date">No Due Date</button>
                     <button id="due-today">Today</button>
@@ -26,7 +23,8 @@
                     <button id="due-month">This month</button>
                 </div>
                 </br>
-                <h3>Categories</h1>
+                <h3>Categories</h3>
+                </br>
                 <div class="sidebar-container" id="categories">
                 </div>
             </div>
@@ -54,7 +52,10 @@
         <div id="header">
             <div class="header-left">
                 <button id="menu-toggle" class="material-icons">menu</button>
-                <h2 id="view-title">All Tasks</h2>
+                <div id="title"> 
+                    <span class='material-icons'>checklist</span>
+                    <span>ToDo List</span>
+                </div>
             </div>
             <div class="header-right">
                 <button id="toggle-completed" class="material-icons" title="Toggle Completed">visibility</button>

@@ -55,7 +55,7 @@
 }
 
 #menu-toggle {
-    display: block; /* Visible by default on mobile */
+    display: block; 
     margin: 10px;
     background-color: transparent;
     border: none;
@@ -73,9 +73,11 @@
 @media (min-width: 768px) {
     #main-container {
         display: grid;
-        grid-template-columns: 260px 1fr;
+        grid-template-columns: 300px 1fr;
+        grid-template-rows: auto 1fr;
         grid-template-areas: 
             "side header"
+            "side content"
             "side content";
     }
 
@@ -95,6 +97,12 @@
     #content {
         grid-area: content;
         padding: 40px;
+        display: flex;
+        align-items: center;
+    }
+
+    .todo-row, #new-todo-row {
+        min-width: 1000px;
     }
 
     #menu-toggle, #toggle-completed, #theme-toggle {
