@@ -66,7 +66,6 @@ function updateView() {
 
     const $viewContainer = createHtmlElement('h2', mappedView, undefined, 'current-view');
     $mainContent.appendChild($viewContainer);
-
 }
 
 // This "dumb" function ONLY accepts a list of todos and renders them

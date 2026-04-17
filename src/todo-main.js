@@ -34,7 +34,7 @@ const todo = ({
     duedate, 
     category, 
     priority, 
-    id = crypto.randomUUID(), 
+    id = generateID(), 
     status = false 
 }) => {
     return {
@@ -47,6 +47,16 @@ const todo = ({
         status,
     };
 };
+
+function generateID() {
+    // If the browser supports crypto.randomUUID (Secure context)
+    if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+        return crypto.randomUUID();
+    }
+    // Fallback for insecure contexts (like mobile dev over IP)
+    return Math.random().toString(36).substring(2, 11) + 
+           Math.random().toString(36).substring(2, 11);
+}
 
 // The Librarian - this IS an object, it manages our [] library.
 // specifically, todoManager manzges the state of our todo list object. 
