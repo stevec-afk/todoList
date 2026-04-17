@@ -82,6 +82,7 @@ $sidebar.addEventListener('click', (e) => {
     const btn = e.target.closest('button');
     if (!btn) return; // Checks to make sure a button was clicked
     $sidebar.classList.remove('active'); // Hides the sidebar after a click
+    if (btn.id === 'close-sidebar') return; // Close the sidebar on X button tap
 
     if (btn.id === 'new-task') {
         $addModal.showModal();

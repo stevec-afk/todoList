@@ -1,7 +1,7 @@
 #main-container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100dvh;
 }
 
 #sidebar {
@@ -16,10 +16,31 @@
     transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
-    padding: 2rem clamp(1.5rem, 5vw, 3rem);
+    padding: 0 2.5rem 1.5rem;
+    height: 100dvh; 
+    overflow-y: auto;
+    overscroll-behavior: contain; 
 }
 
-/* Class to slide sidebar in (toggled by JS) */
+#sidebar-main {
+    /* This creates the gap for the Close button on mobile 
+       but disappears on desktop. */
+    margin-top: clamp(4rem, 8vh, 5rem);
+}
+
+
+#close-sidebar {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 2.8rem; /* Large enough for a thumb tap */
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
 #sidebar.active {
     transform: translateX(0);
     box-shadow: 0.5rem 0 1.5rem rgba(0,0,0,0.1);
@@ -27,7 +48,6 @@
 
 /* Sidebar container for the toggleable options */ 
 .sidebar-options {
-    border-top: 0.2rem solid var(--border);
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -35,8 +55,8 @@
 }
 
 #title {
-    font-size: 2.4rem;
-    margin: 0.8rem;
+    font-size: 2rem;
+    margin: 0.5rem 0.8rem;
 }
 
 #header {
@@ -66,10 +86,14 @@
 
 #content {
     flex: 1;
-    padding: clamp(1.5rem, 3vw, 4rem);
+    padding: 3rem 0; 
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    overflow-y: auto;
 }
 
-/* 2. DESKTOP ADAPTATIONS (768px and up) */
+/* DESKTOP ADAPTATIONS (768px and up) */
 @media (min-width: 768px) {
     #main-container {
         display: grid;
@@ -89,6 +113,14 @@
         padding: 2rem;
     }
 
+    #sidebar-main {
+        margin-top: 2.5rem; /* Much smaller gap on desktop */
+    }
+
+    #close-sidebar {
+        display: none;
+    }
+
     #header {
         grid-area: header;
         padding: 0 4rem;
@@ -96,10 +128,6 @@
 
     #content {
         grid-area: content;
-        /* padding: 40px; */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
     }
 
     .todo-row, #new-todo-row, .empty-msg {
