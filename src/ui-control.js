@@ -9,6 +9,7 @@ const $addForm = document.getElementById('add-form');
 const $editForm = document.getElementById('edit-form')
 const $addModal = document.getElementById('add-modal');
 const $editModal = document.getElementById('edit-modal');
+const $header = document.getElementById('header');
 
 // The date view map - this defines the logic for the date filters
 const dateFilter = {
@@ -80,7 +81,8 @@ function toggleTheme() {
 $sidebar.addEventListener('click', (e) => {
     const btn = e.target.closest('button');
     if (!btn) return; // Checks to make sure a button was clicked
-    
+    $sidebar.classList.remove('active'); // Hides the sidebar after a click
+
     if (btn.id === 'new-task') {
         $addModal.showModal();
         return;
@@ -126,6 +128,16 @@ $editForm.addEventListener('submit', (e) => {
     renderCategories();
     refreshUI();
     $editModal.close();
+});
+
+// Event listener for the header
+$header.addEventListener('click', (e) => {
+    if (e.target.closest('#menu-toggle')) {
+        $sidebar.classList.toggle('active');
+        return;
+    }
+
+    // >insert code to handle night mode and hide completed buttons<
 });
 
 // Event listener for the main content
