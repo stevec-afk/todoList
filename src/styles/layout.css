@@ -9,25 +9,25 @@
     top: 0;
     left: 0;
     bottom: 0;
-    width: 280px;
+    width: 100%;
     background-color: var(--bg-sidebar);
     z-index: 1000;
     transform: translateX(-100%); /* Hidden by default */
     transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
-    padding: 20px 0;
+    padding: 2rem clamp(1.5rem, 5vw, 3rem);
 }
 
 /* Class to slide sidebar in (toggled by JS) */
 #sidebar.active {
     transform: translateX(0);
-    box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+    box-shadow: 0.5rem 0 1.5rem rgba(0,0,0,0.1);
 }
 
 /* Sidebar container for the toggleable options */ 
 .sidebar-options {
-    border-top: 2px solid var(--border);
+    border-top: 0.2rem solid var(--border);
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -35,18 +35,18 @@
 }
 
 #title {
-    font-size: 2rem;
-    margin: 8px;
+    font-size: 2.4rem;
+    margin: 0.8rem;
 }
 
 #header {
-    height: 70px;
-    padding: 0 20px;
+    height: 7rem;
+    padding: 0 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: var(--bg-main);
-    border-bottom: 1px solid var(--border);
+    border-bottom: 0.1rem solid var(--border);
 }
 
 .header-left {
@@ -56,29 +56,29 @@
 
 #menu-toggle {
     display: block; 
-    margin: 10px;
+    margin: 1rem;
     background-color: transparent;
     border: none;
     outline: none;
-    font-size: 2rem;
-    padding-bottom: 5px;
+    font-size: 2.5rem;
+    /* padding-bottom: 5px; - AI removed in refactor*/
 }
 
 #content {
     flex: 1;
-    padding: 20px;
+    padding: clamp(1.5rem, 3vw, 4rem);
 }
 
 /* 2. DESKTOP ADAPTATIONS (768px and up) */
 @media (min-width: 768px) {
     #main-container {
         display: grid;
-        grid-template-columns: 300px 1fr;
+        grid-template-columns: 26rem 1fr;
         grid-template-rows: auto 1fr;
         grid-template-areas: 
             "side header"
             "side content"
-            "side content";
+            "side content"; 
     }
 
     #sidebar {
@@ -86,23 +86,25 @@
         transform: translateX(0); /* Always visible */
         grid-area: side;
         width: auto;
-        padding: 16px;
+        padding: 2rem;
     }
 
     #header {
         grid-area: header;
-        padding: 0 40px;
+        padding: 0 4rem;
     }
 
     #content {
         grid-area: content;
-        padding: 40px;
+        /* padding: 40px; */
         display: flex;
+        flex-direction: column;
         align-items: center;
     }
 
-    .todo-row, #new-todo-row {
-        min-width: 1000px;
+    .todo-row, #new-todo-row, .empty-msg {
+        width: 100%;
+        max-width: 80rem;
     }
 
     #menu-toggle, #toggle-completed, #theme-toggle {
