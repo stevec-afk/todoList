@@ -13,19 +13,32 @@
 <body class="preload">
     <div id="main-container">
         <aside id="sidebar">
+            <button id="close-sidebar" class="material-icons">close</button>
             <div id="sidebar-main">
                 <div class="sidebar-container"> 
                     <h3>Filters</h3>
-                    </br>
-                    <button id="all-tasks" data-category="all-tasks">All Tasks</button>
-                    <button id="no-due-date">No Due Date</button>
-                    <button id="due-today">Today</button>
-                    <button id="due-tomorrow">Tomorrow</button>
-                    <button id="due-month">This month</button>
+                    <button id="all-tasks" data-category="all-tasks">
+                        <span class="material-icons">inventory_2</span>
+                        <span>All Tasks</span>
+                    </button>
+                    <button id="no-due-date">
+                        <span class="material-icons">upcoming</span>
+                        <span>No Due Date</span>
+                    </button>
+                    <button id="due-today">
+                        <span class="material-icons">today</span>
+                        <span>Today</span>
+                    </button>
+                    <button id="due-tomorrow">
+                        <span class="material-icons">event_repeat</span>
+                        <span>Tomorrow</span>
+                    </button>
+                    <button id="due-month">
+                        <span class="material-icons">calendar_month</span>
+                        <span>This month</span>
+                    </button>
                 </div>
-                </br>
                 <h3>Categories</h3>
-                </br>
                 <div class="sidebar-container" id="categories">
                 </div>
             </div>
@@ -47,7 +60,11 @@
             </div>
             <div id="side-footer">
                 <button id="reset">⚠️ Reset the app ⚠️</button>
-                <span> Steve C | source </span>
+                <div class="footer-links">
+                    <a href="https://github.com/stevec-afk" target="_blank">Steve C</a>
+                    <span class="separator">|</span>
+                    <a href="https://github.com/stevec-afk/todoList" target="_blank">Source</a>
+                </div>
             </div>
         </aside>
         <div id="header">

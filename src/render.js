@@ -101,7 +101,10 @@ function renderCategories () {
     $categoriesContainer.innerHTML = '';
 
     categories.forEach(item => {
-        const catButton = createHtmlElement('button', item, ['category-button']);
+        const catButton = createHtmlElement('button', undefined, ['category-button']);
+        const icon = createHtmlElement('span', 'label', ['material-icons']);
+        const text = createHtmlElement('span', item);
+        catButton.append(icon, text);
         catButton.dataset.category = item;
         $categoriesContainer.appendChild(catButton);
     });
