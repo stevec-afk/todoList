@@ -170,6 +170,7 @@ $mainContent.addEventListener('click', (e) => {
     if (e.target.type === 'checkbox') {
         todoManager.toggleStatus(targetTodoId);
         refreshUI();
+        return;
     }
     else if (e.target.closest('.delete-row-btn')) {
         if (window.confirm('Are you sure you want to delete this task?')) {
@@ -177,19 +178,18 @@ $mainContent.addEventListener('click', (e) => {
             refreshUI();
             renderCategories();
         }
+        return;
     }
-    else if (e.target.closest('.details-btn')) {
-        $editForm.reset(); // Reset the edit form
+    $editForm.reset(); // Reset the edit form
 
-        const task = todoManager.getById(targetTodoId);
-        document.getElementById('edit-title').value = task.title;
-        document.getElementById('edit-desc').value = task.description;
-        document.getElementById('edit-cat').value = task.category;
-        document.getElementById('edit-date').value = task.duedate;
-        document.getElementById('edit-prio').value = task.priority;
-        $editForm.dataset.id = targetTodoId;
-        $editModal.showModal();
-    }
+    const task = todoManager.getById(targetTodoId);
+    document.getElementById('edit-title').value = task.title;
+    document.getElementById('edit-desc').value = task.description;
+    document.getElementById('edit-cat').value = task.category;
+    document.getElementById('edit-date').value = task.duedate;
+    document.getElementById('edit-prio').value = task.priority;
+    $editForm.dataset.id = targetTodoId;
+    $editModal.showModal();
 });
 
 export { refreshUI, syncSidebarToggles };
