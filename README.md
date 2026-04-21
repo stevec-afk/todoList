@@ -1,6 +1,6 @@
 # Todo List
 
-Live Demo: [https://github.io](https://github.io)
+Live Demo: [[https://github.io](https://github.io)](https://stevec-afk.github.io/todoList/)
 
 ## Overview
 A task management application built as part of The Odin Project curriculum. The app focuses on a clean, minimalist UI with a fluid layout that adapts between mobile and desktop views.
