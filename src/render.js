@@ -73,7 +73,10 @@ function updateView() {
 function renderTodos (todoList){
     $mainContent.innerHTML = ''; // Clean slate
     updateView(); 
+    // Add an additional "new todo" button at the bottom of the list. 
     const $newTodoButton = createHtmlElement('button', 'Add new task', ['add-task-inline']);
+    $newTodoButton.setAttribute('command', 'show-modal');
+    $newTodoButton.setAttribute('commandfor', 'add-modal');
 
     if (todoList.length === 0 ){ // Check for empty list
         const $emptymsg = createHtmlElement('p', 'Nothing to do here!', ['empty-msg']);
@@ -86,10 +89,8 @@ function renderTodos (todoList){
             $mainContent.appendChild($newRow);
         });
     }
-    // Add an additional "new todo" button at the bottom of the list. 
+
     const $newTodoRow = createHtmlElement('div', undefined, undefined, 'new-todo-row');
-    $newTodoButton.setAttribute('command', 'show-modal');
-    $newTodoButton.setAttribute('commandfor', 'add-modal');
     $newTodoRow.appendChild($newTodoButton);
     $mainContent.appendChild($newTodoRow);
 }

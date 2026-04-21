@@ -84,10 +84,6 @@ $sidebar.addEventListener('click', (e) => {
     $sidebar.classList.remove('active'); // Hides the sidebar after a click
     if (btn.id === 'close-sidebar') return; // Close the sidebar on X button tap
 
-    if (btn.id === 'new-task') {
-        $addModal.showModal();
-        return;
-    }
     if(btn.id === 'reset') {
         console.log('Reset clicked!');
         if (confirm('Nuke everything and restore defaults?')) {
