@@ -12,7 +12,7 @@ function createHtmlElement (type, content, classes, id){
     return element;
 }
 // Helper for creating a row on the DOM for 1 todo element
-function createTaskRow (todo) {
+function createTaskRow(todo) {
     const priorityClass = `prio-${todo.priority}`
     const $todoRow = createHtmlElement('div', undefined, ['todo-row', priorityClass]);
     $todoRow.dataset.id = todo.id; // Attach the todo ID to the container
@@ -70,7 +70,7 @@ function updateView() {
 
 // This "dumb" function ONLY accepts a list of todos and renders them
 // This function does not make decisions, it only renders. 
-function renderTodos (todoList){
+function renderTodos(todoList){
     $mainContent.innerHTML = ''; // Clean slate
     updateView(); 
     // Add an additional "new todo" button at the bottom of the list. 

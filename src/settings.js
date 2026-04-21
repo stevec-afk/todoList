@@ -1,9 +1,11 @@
-let preferences = {
+const defaults = {
     showCompleted: true,
     darkMode: false,
     sidebarCollapsed: false,
     currentView: 'all-tasks'
 };
+
+let preferences = { ...defaults };
 
 const settingsManager = {
     init: () => {
@@ -18,6 +20,10 @@ const settingsManager = {
             preferences[key] = value;
             localStorage.setItem('todo_settings', JSON.stringify(preferences));
         }
+    },
+    reset: () => {
+        preferences = { ...defaults };
+        localStorage.setItem('todo_settings', JSON.stringify(preferences));
     }
 }
 

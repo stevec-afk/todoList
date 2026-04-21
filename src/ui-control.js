@@ -70,18 +70,27 @@ function initializeFormDefaults(){
 }
 initializeFormDefaults();
 
-// Helper function to toggle the theme - update me. 
-function toggleTheme() {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', targetTheme);
+// Initialization for toggleable settings
+function syncSidebarToggles() {
+    console.log('sidebar toggle sync called')
+    const { showCompleted, darkMode } = settingsManager.getPrefs();
+    
+    // Check if elements exist to prevent errors during testing/setup
+    const $completedCheck = document.getElementById('show-completed-toggle');
+    const $darkCheck = document.getElementById('dark-mode-toggle');
+
+    if ($completedCheck) $completedCheck.checked = showCompleted;
+    if ($darkCheck) {
+        $darkCheck.checked = darkMode;
+        document.documentElement.setAttribute('data-theme', darkMode ? 'dark' : 'light');
+    }
 }
 
 // Event listener for the sidebar
 $sidebar.addEventListener('click', (e) => {
     const btn = e.target.closest('button');
     if (!btn) return; // Checks to make sure a button was clicked
-    $sidebar.classList.remove('active'); // Hides the sidebar after a click
+    $sidebar.classList.remove('active'); // Hides the sidebar after any click
     if (btn.id === 'close-sidebar') return; // Close the sidebar on X button tap
 
     if(btn.id === 'reset') {
@@ -89,6 +98,8 @@ $sidebar.addEventListener('click', (e) => {
         if (confirm('Nuke everything and restore defaults?')) {
             todoManager.resetApp();
             console.log('Current Tasks:', todoManager.getAll());
+            settingsManager.reset(); // resets preferences to default
+            syncSidebarToggles(); // Syncs UI state to prefs
             renderCategories();
             refreshUI();
         }
@@ -100,6 +111,20 @@ $sidebar.addEventListener('click', (e) => {
     // Assumes that if a button has a category & ID, we are using the category.
     settingsManager.update('currentView', btn.dataset.category || btn.id);
     refreshUI();
+});
+
+// Event listener for the sidebar toggle buttons
+$sidebar.addEventListener('change', (e) => {
+    if (e.target.id === 'show-completed-toggle') {
+        settingsManager.update('showCompleted', e.target.checked);
+        refreshUI();
+    }
+
+    if (e.target.id == 'dark-mode-toggle') {
+        settingsManager.update('darkMode', e.target.checked);
+        const theme = e.target.checked ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+    }
 });
 
 // Event listener for the 'add new todo' form
@@ -127,14 +152,12 @@ $editForm.addEventListener('submit', (e) => {
     $editModal.close();
 });
 
-// Event listener for the header
+// Event listener for the hamburger menu to open the sidebar
 $header.addEventListener('click', (e) => {
     if (e.target.closest('#menu-toggle')) {
         $sidebar.classList.toggle('active');
         return;
     }
-
-    // >insert code to handle night mode and hide completed buttons<
 });
 
 // Event listener for the main content
@@ -169,4 +192,4 @@ $mainContent.addEventListener('click', (e) => {
     }
 });
 
-export { refreshUI };
+export { refreshUI, syncSidebarToggles };
