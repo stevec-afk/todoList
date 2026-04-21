@@ -15,10 +15,6 @@
     transition: background-color 0.2s ease;
 }
 
-@media (min-width: 768px) {
-    .sidebar-container button { margin-bottom: 4px; }
-}
-
 .sidebar-container button .material-icons {
     font-size: 2rem;
     color: var(--accent);
@@ -43,7 +39,7 @@
 .toggle-container {
     display: flex;
     align-items: center;
-    font-size: 1.4rem; /* Standardizing text next to switches */
+    font-size: 1.4rem;
 }
 
 .switch {
@@ -96,20 +92,6 @@ input:checked + .slider:before {
   transform: translateX(2rem);
 }
 
-@media (min-width: 768px) {
-    .switch {
-        width: 3.5rem; /* Slightly smaller for desktop precision */
-        height: 2rem;
-    }
-    .slider:before {
-        height: 1.4rem;
-        width: 1.4rem;
-    }
-    input:checked + .slider:before {
-        transform: translateX(1.5rem);
-    }
-}
-
 /* Sidebar footer */
 
 #side-footer {
@@ -122,7 +104,7 @@ input:checked + .slider:before {
 }
 
 .footer-links {
-    font-size: 1.5rem; /* Slightly increased */
+    font-size: 1.5rem;
     color: var(--text-muted);
 }
 
@@ -154,14 +136,6 @@ input:checked + .slider:before {
     transition: var(--transition);
 }
 
-@media (min-width: 768px) {
-    #reset {
-        width: auto; /* Shrinks back to fit content on desktop */
-        padding: 0.5rem 1.5rem;
-        font-size: 1.1rem;
-    }
-}
-
 #reset:hover {
     background: none;
     color: var(--priority-high);
@@ -179,10 +153,6 @@ dialog {
     color: var(--text-main);
 }
 
-@media (min-width: 768px) {
-    /* Centers modal on desktop view */
-    dialog { margin: auto; }
-}
 
 dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.6);
@@ -290,15 +260,21 @@ form h3 {
 }
 
 .todo-row {
-    width: 100%;
+    display: grid;
+    grid-template-columns: 3rem 1fr auto;
+    grid-template-rows: auto auto;
+    align-items: center;
+    column-gap: 1rem;
+    padding: 1.2rem 1rem;
     background-color: var(--bg-card);
     border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    padding: clamp(1rem, 2vh, 1.2rem) 1.5rem;
-    gap: 1.5em;
     transition: var(--transition);
-    border-left: 4px solid transparent;
+    width: 100%;
+}
+
+.delete-row-btn {
+    grid-column: 3;
+    grid-row: 1 / span 2; /* Centered vertically on the right */
 }
 
 #content .todo-row:nth-of-type(1) {
@@ -315,23 +291,31 @@ form h3 {
 .todo-row.prio-low { border-left-color: var(--priority-low); }
 
 .todo-row input[type="checkbox"] {
+    grid-column: 1;
+    grid-row: 1 / span 2; /* Span both rows to stay centered next to the text */
     cursor: pointer;
     accent-color: var(--accent-bright);
     width: 1.8rem;
     height: 1.8rem;
+    padding-left: 1.2rem;
 }
 
 .task-title {
-    flex-grow: 1;
+    grid-column: 2;
+    grid-row: 1;
     font-size: 1.6rem;
-    color: var(--text-main);
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
-
 .task-date {
-    font-size: 1.3rem;
+    grid-column: 2;
+    grid-row: 2;
+    text-align: left; /* Aligns under the start of the title */
+    font-size: 1.2rem;
     color: var(--text-muted);
-    min-width: 10rem;
-    text-align: right;
+    margin-top: 0.2rem;
 }
 
 /* Action Buttons */
@@ -347,6 +331,9 @@ form h3 {
     padding: 0.5rem;
     border-radius: 0.4rem;
     transition: var(--transition);
+}
+.details-btn {
+    display: none;
 }
 
 .details-btn:hover { color: var(--accent-bright); }
@@ -384,4 +371,47 @@ form h3 {
     padding: 4rem;
     font-style: italic;
     font-size: 1.6rem;
+}
+
+/* Desktop adaptations */
+
+@media (min-width: 768px) {
+    .sidebar-container button { 
+        margin-bottom: 4px; 
+    }
+    .switch {
+        width: 3.5rem; /* Slightly smaller for desktop precision */
+        height: 2rem;
+    }
+    .slider:before {
+        height: 1.4rem;
+        width: 1.4rem;
+    }
+    input:checked + .slider:before {
+        transform: translateX(1.5rem);
+    }
+    dialog { 
+        margin: auto; 
+    }
+    .details-btn {
+        display: flex;
+    }
+    .todo-row {
+        display: flex; /* Switch back to flex for the horizontal desktop look */
+        padding: 1rem 1.5rem;
+        
+    }
+    .task-date {
+        margin-top: 0;
+        text-align: right;
+        min-width: 10rem;
+    }
+    .task-title {
+        flex-grow: 1;
+    }
+    #reset {
+        width: auto; /* Shrinks back to fit content on desktop */
+        padding: 0.5rem 1.5rem;
+        font-size: 1.1rem;
+    }
 }
