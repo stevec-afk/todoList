@@ -361,7 +361,7 @@ button * {
 
 .sidebar-container button .material-icons {
     font-size: 2rem;
-    color: var(--accent);
+    color: var(--accent-bright);
     opacity: 0.8;
 }
 
