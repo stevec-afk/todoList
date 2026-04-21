@@ -192,4 +192,19 @@ $mainContent.addEventListener('click', (e) => {
     $editModal.showModal();
 });
 
+// Event listener for the add-modal 
+$addModal.addEventListener('toggle', (e) => {
+    if (e.newState === 'open') { // Do this only if modal opens
+        const { currentView } = settingsManager.getPrefs();
+        const $addCatInput = document.getElementById('add-cat');
+        const systemViews = ['all-tasks', 'due-today', 'due-tomorrow', 'due-month', 'no-due-date'];
+
+        if (!systemViews.includes(currentView)) {
+            $addCatInput.value = currentView;
+        } else {
+            $addCatInput.value = ''; 
+        }
+    }
+});
+
 export { refreshUI, syncSidebarToggles };
