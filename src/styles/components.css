@@ -30,12 +30,12 @@
 }
 
 #sidebar button:active {
-    background-color: rgba(93, 138, 168, 0.1);
+    background-color: var(--bg-sidebar-hover);
     border-color: var(--border);
-}
+} 
 
 .sidebar-container button:hover {
-    background-color: rgba(93, 138, 168, 0.1);
+    background-color: var(--bg-sidebar-hover);
 }
 
 /* Sidebar toggle switches */ 
@@ -85,11 +85,11 @@
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: var(--accent);
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px var(--accent);
 }
 
 input:checked + .slider:before {

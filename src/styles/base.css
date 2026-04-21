@@ -7,9 +7,10 @@
     --bg-card: #ffffff;
     --text-main: #2d3436;
     --text-muted: #636e72;
-    --accent: #00a8ff;
+    --accent: #dbeafe;
     --accent-hover: #4a6e8a;
     --border: #e1e8ed;
+    --bg-sidebar-hover: #dbeafe;
 
     /* Priority Colors */
     --priority-high: #ff7675;
@@ -29,8 +30,10 @@
     --bg-card: #252525;
     --text-main: #e0e0e0;
     --text-muted: #b0b0b0;
+    --accent: #00aaff;
     --border: #333333;
     --shadow: 0 0.4rem 1rem rgba(0,0,0,0.3);
+    --bg-sidebar-hover: #353b3d;
 }
 
 *, *:before, *:after {
