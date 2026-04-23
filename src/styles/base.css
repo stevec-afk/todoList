@@ -1,7 +1,7 @@
 @import '~material-icons/iconfont/material-icons.css';
 
 :root {
-    /* Light Mode (Soft Minimalist / GDA-inspired) */
+    /* Light Mode */
     --bg-main: #ffffff;
     --bg-sidebar: #f4f7f6;
     --bg-card: #ffffff;
@@ -24,7 +24,7 @@
     --transition: all 0.3s ease;
 }
 
-/* 2. Dark Mode Override */
+/* Dark Mode Override */
 [data-theme='dark'] {
     --bg-main: #121212;
     --bg-sidebar: #1e1e1e;
@@ -61,9 +61,5 @@ button * {
 }
 
 .preload * {
-    -webkit-transition: none !important;
-    -moz-transition: none !important;
-    -ms-transition: none !important;
-    -o-transition: none !important;
     transition: none !important;
 }

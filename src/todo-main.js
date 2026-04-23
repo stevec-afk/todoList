@@ -1,3 +1,4 @@
+// Some default data to display when resetting the app
 const defaultData = [
     {
         title: "Pay Bills",
@@ -48,6 +49,7 @@ const todo = ({
     };
 };
 
+// This is needed because crypto.randomUUID breaks when using dev server, ie.: localhost:3000
 function generateID() {
     // If the browser supports crypto.randomUUID (Secure context)
     if (typeof crypto !== "undefined" && crypto.randomUUID) {
@@ -60,7 +62,7 @@ function generateID() {
 }
 
 // The Librarian - this IS an object, it manages our [] library.
-// specifically, todoManager manzges the state of our todo list object.
+// specifically, todoManager manages the state of our todo list object.
 const todoManager = {
     add: (data) => {
         const newTodo = todo(data);
@@ -107,14 +109,14 @@ const todoManager = {
         finalArray.forEach((item) => todoManager.add(item));
     },
     resetApp: () => {
-        localStorage.clear(); // nukes everything in localStorage!
-        myTodoList = []; // clears the todo list
+        localStorage.clear(); // !!CAUTION!! nukes **E V E R Y T H I N G** in localStorage!
+        myTodoList = [];
         todoManager.init(); // re-initialize from defaults
     },
     getCategories: () => {
-        // Generates a list of categories from existing todos,
-        // combines it with the default categories,
-        // and then removes duplicates.
+        // 1. Generates a list of categories from existing todos,
+        // 2. combines it with the default categories,
+        // 3. and then removes duplicates.
         const taskCategories = myTodoList
             .map((todo) => todo.category)
             .filter((cat) => cat && cat.trim() !== ""); // removes blanks

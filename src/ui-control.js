@@ -59,11 +59,14 @@ function refreshUI() {
         filteredTodos = filteredTodos.filter((t) => !t.status);
     }
 
+    // After we figure out what to render, the job is handed off to the next module.
+    // Single responsibility!
     renderTodos(filteredTodos);
 }
 
 // Initializing the HTML form with sane defaults to help validate
 // ie - preventing the user from selecting a date in the past
+// You could put other form defaults in here too if needed
 function initializeFormDefaults() {
     const today = format(new Date(), "yyyy-MM-dd");
     const $addDate = $addForm.elements["duedate"];
@@ -71,7 +74,7 @@ function initializeFormDefaults() {
 }
 initializeFormDefaults();
 
-// Initialization for toggleable settings
+// Initialization for toggleable settings, syncs UI state with stored settings
 function syncSidebarToggles() {
     console.log("sidebar toggle sync called");
     const { showCompleted, darkMode } = settingsManager.getPrefs();
@@ -91,7 +94,7 @@ function syncSidebarToggles() {
 $sidebar.addEventListener("click", (e) => {
     const btn = e.target.closest("button");
     if (!btn) return; // Checks to make sure a button was clicked
-    $sidebar.classList.remove("active"); // Hides the sidebar after any click
+    $sidebar.classList.remove("active"); // Hides the sidebar after any click - for mobile
     if (btn.id === "close-sidebar") return; // Close the sidebar on X button tap
 
     if (btn.id === "reset") {
@@ -109,7 +112,7 @@ $sidebar.addEventListener("click", (e) => {
 
     // Udpate the current view with either category, or button ID,
     // depending on what was clicked. If category does not exist, use ID instead.
-    // Assumes that if a button has a category & ID, we are using the category.
+    // Assumes that IF a button has a category & ID, we are using the category.
     settingsManager.update("currentView", btn.dataset.category || btn.id);
     refreshUI();
 });
@@ -131,7 +134,7 @@ $sidebar.addEventListener("change", (e) => {
 // Event listener for the 'add new todo' form
 $addForm.addEventListener("submit", (e) => {
     const data = Object.fromEntries(new FormData(e.target));
-    if (data.category) data.category = data.category.trim(); // filters blanks
+    if (data.category) data.category = data.category.trim(); // filters out blanks
 
     todoManager.add(data);
     renderCategories();
@@ -182,6 +185,7 @@ $mainContent.addEventListener("click", (e) => {
     }
     $editForm.reset(); // Reset the edit form
 
+    // Hydrates the edit form with the values from the todo we are editing
     const task = todoManager.getById(targetTodoId);
     document.getElementById("edit-title").value = task.title;
     document.getElementById("edit-desc").value = task.description;
@@ -194,8 +198,8 @@ $mainContent.addEventListener("click", (e) => {
 
 // Event listener for the add-modal
 $addModal.addEventListener("toggle", (e) => {
+    // Do this only if modal is opening
     if (e.newState === "open") {
-        // Do this only if modal opens
         const { currentView } = settingsManager.getPrefs();
         const $addCatInput = document.getElementById("add-cat");
         const systemViews = ["all-tasks", "due-today", "due-tomorrow", "due-month", "no-due-date"];

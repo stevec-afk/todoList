@@ -23,7 +23,7 @@
 }
 
 #sidebar-main {
-    /* This creates the gap for the Close button on mobile 
+    /* This creates the gap for the close button on mobile 
        but disappears on desktop. */
     margin-top: clamp(4rem, 8vh, 5rem);
 }
@@ -36,7 +36,7 @@
     background: none;
     border: none;
     color: var(--text-muted);
-    font-size: 2.8rem; /* Large enough for a thumb tap */
+    font-size: 2.8rem;
     cursor: pointer;
     padding: 0.5rem;
 }
@@ -103,7 +103,7 @@
     overflow-y: auto;
 }
 
-/* DESKTOP ADAPTATIONS (768px and up) */
+/* DESKTOP ADAPTATIONS */
 @media (min-width: 768px) {
     #main-container {
         display: grid;

@@ -3,6 +3,7 @@ import { settingsManager } from "./settings";
 
 const $mainContent = document.getElementById("content");
 
+// Helper function for creating HTML elements easier
 function createHtmlElement(type, content, classes, id) {
     const element = document.createElement(type);
     if (content) element.innerText = content;
@@ -11,7 +12,7 @@ function createHtmlElement(type, content, classes, id) {
 
     return element;
 }
-// Helper for creating a row on the DOM for 1 todo element
+// Helper function for creating a row on the DOM for 1 todo element
 function createTaskRow(todo) {
     const priorityClass = `prio-${todo.priority}`;
     const $todoRow = createHtmlElement("div", undefined, ["todo-row", priorityClass]);
@@ -91,6 +92,7 @@ function renderTodos(todoList) {
         });
     }
 
+    // If the list is not empty, create a container row so the button can be left-aligned
     const $newTodoRow = createHtmlElement("div", undefined, undefined, "new-todo-row");
     $newTodoRow.appendChild($newTodoButton);
     $mainContent.appendChild($newTodoRow);
