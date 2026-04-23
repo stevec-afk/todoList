@@ -124,7 +124,7 @@
 }
 
 :root {
-    /* Light Mode (Soft Minimalist / GDA-inspired) */
+    /* Light Mode */
     --bg-main: #ffffff;
     --bg-sidebar: #f4f7f6;
     --bg-card: #ffffff;
@@ -147,7 +147,7 @@
     --transition: all 0.3s ease;
 }
 
-/* 2. Dark Mode Override */
+/* Dark Mode Override */
 [data-theme='dark'] {
     --bg-main: #121212;
     --bg-sidebar: #1e1e1e;
@@ -184,10 +184,6 @@ button * {
 }
 
 .preload * {
-    -webkit-transition: none !important;
-    -moz-transition: none !important;
-    -ms-transition: none !important;
-    -o-transition: none !important;
     transition: none !important;
 }
 
@@ -216,7 +212,7 @@ button * {
 }
 
 #sidebar-main {
-    /* This creates the gap for the Close button on mobile 
+    /* This creates the gap for the close button on mobile 
        but disappears on desktop. */
     margin-top: clamp(4rem, 8vh, 5rem);
 }
@@ -229,7 +225,7 @@ button * {
     background: none;
     border: none;
     color: var(--text-muted);
-    font-size: 2.8rem; /* Large enough for a thumb tap */
+    font-size: 2.8rem;
     cursor: pointer;
     padding: 0.5rem;
 }
@@ -296,7 +292,7 @@ button * {
     overflow-y: auto;
 }
 
-/* DESKTOP ADAPTATIONS (768px and up) */
+/* DESKTOP ADAPTATIONS */
 @media (min-width: 768px) {
     #main-container {
         display: grid;
