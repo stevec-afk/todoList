@@ -1,43 +1,45 @@
-@import '~material-icons/iconfont/material-icons.css';
+@import "~material-icons/iconfont/material-icons.css";
 
 :root {
     /* Light Mode (Soft Minimalist / GDA-inspired) */
-    --bg-main: #f4f7f6;           /* Very light minty grey */
-    --bg-sidebar: #ffffff;        /* Clean white sidebar */
-    --bg-card: #ffffff;           /* Task rows */
-    --text-main: #2d3436;         /* Soft charcoal */
-    --text-muted: #636e72;        /* Grey for dates/details */
-    --accent: #5d8aa8;            /* The "GDA" Blue */
+    --bg-main: #f4f7f6; /* Very light minty grey */
+    --bg-sidebar: #ffffff; /* Clean white sidebar */
+    --bg-card: #ffffff; /* Task rows */
+    --text-main: #2d3436; /* Soft charcoal */
+    --text-muted: #636e72; /* Grey for dates/details */
+    --accent: #5d8aa8; /* The "GDA" Blue */
     --accent-hover: #4a6e8a;
-    --border: #e1e8ed;            /* Subtle separators */
+    --border: #e1e8ed; /* Subtle separators */
 
     /* Priority Colors */
-    --priority-high: #ff7675;     /* Soft Red */
-    --priority-med: #fab1a0;      /* Soft Orange */
-    --priority-low: #55efc4;      /* Soft Green */
+    --priority-high: #ff7675; /* Soft Red */
+    --priority-med: #fab1a0; /* Soft Orange */
+    --priority-low: #55efc4; /* Soft Green */
 
     /* Shadows & Radius */
-    --shadow: 0 2px 5px rgba(0,0,0,0.05);
+    --shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     --radius: 8px;
     --transition: all 0.3s ease;
 }
 
 /* 2. Dark Mode Override */
-[data-theme='dark'] {
+[data-theme="dark"] {
     --bg-main: #121212;
-   --bg-sidebar: #1e1e1e;
-   --bg-card: #252525;
-   --text-main: #e0e0e0;
-   --text-muted: #b0b0b0;
-   --border: #333333;
-   --shadow: 0 4px 10px rgba(0,0,0,0.3);
+    --bg-sidebar: #1e1e1e;
+    --bg-card: #252525;
+    --text-main: #e0e0e0;
+    --text-muted: #b0b0b0;
+    --border: #333333;
+    --shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 html {
     box-sizing: border-box;
 }
-  
-*, *:before, *:after {
+
+*,
+*:before,
+*:after {
     box-sizing: inherit;
     margin: 0;
 }
@@ -45,13 +47,12 @@ html {
 body {
     background-color: var(--bg-main);
     color: var(--text-main);
-    font-family: 'League Spartan', sans-serif;
+    font-family: "League Spartan", sans-serif;
     transition: var(--transition); /* Smoothly fades colors when switching themes */
 }
-  
 
 button {
-    /* button styles here */ 
+    /* button styles here */
 
     & * {
         /* prevents any elements inside the button from capturing clicks */
@@ -76,7 +77,7 @@ button {
 #sidebar {
     grid-area: side;
     background-color: #f4f4f4;
-    display: flex; 
+    display: flex;
     flex-direction: column;
     padding: 20px;
     gap: 10px;
@@ -116,7 +117,7 @@ button {
     display: flex;
     align-items: center;
     cursor: pointer;
-    font-family: 'League Spartan', sans-serif;
+    font-family: "League Spartan", sans-serif;
     font-size: 1rem;
     color: var(--text-main);
     text-align: left;
@@ -165,23 +166,23 @@ button {
 
 /* The Compact Task Row */
 .todo-item {
-  background-color: var(--bg-card);
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  padding: 12px 20px;
-  gap: 15px;
-  transition: var(--transition);
+    background-color: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    gap: 15px;
+    transition: var(--transition);
 }
 
 .todo-item:hover {
-  background-color: rgba(93, 138, 168, 0.05); /* Very subtle blue tint on hover */
+    background-color: rgba(93, 138, 168, 0.05); /* Very subtle blue tint on hover */
 }
 
 /* The "Fade-out" for Completed tasks */
 .todo-item.completed {
-  opacity: 0.5;
-  filter: grayscale(0.5);
+    opacity: 0.5;
+    filter: grayscale(0.5);
 }
 
 /* This targets the <dialog> element itself */
@@ -190,7 +191,7 @@ dialog {
     padding: 2rem;
     border: none;
     border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     width: 90%;
     max-width: 450px;
 }
@@ -217,11 +218,10 @@ dialog::backdrop {
         min-height: 100vh;
         margin: 0;
     }
-    
+
     #sidebar {
         position: static;
         transform: none;
         width: auto;
     }
 }
-

@@ -1,49 +1,53 @@
 {
-  "name": "todolist",
-  "version": "1.0.0",
-  "description": "Todo list",
-  "homepage": "https://github.com/stevec-afk/TodoList#readme",
-  "bugs": {
-    "url": "https://github.com/stevec-afk/TodoList/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/stevec-afk/TodoList.git"
-  },
-  "license": "MIT",
-  "author": "Steve C",
-  "main": "index.js",
-  "scripts": {
-    "test": "",
-    "build": "webpack --config webpack.prod.js",
-    "dev": "webpack serve --port 3000 --config webpack.dev.js",
-    "deploy": "git subtree push --prefix dist origin gh-pages",
-    "prepare": "husky"
-  },
-  "devDependencies": {
-    "@eslint/js": "^10.0.1",
-    "css-loader": "^7.1.3",
-    "eslint": "^10.2.1",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-prettier": "^5.5.5",
-    "html-loader": "^5.1.0",
-    "html-webpack-plugin": "^5.6.6",
-    "mini-css-extract-plugin": "^2.10.1",
-    "prettier": "^3.8.3",
-    "style-loader": "^4.0.0",
-    "webpack": "^5.104.1",
-    "webpack-cli": "^6.0.1",
-    "webpack-dev-server": "^5.2.3",
-    "webpack-merge": "^6.0.1"
-  },
-  "dependencies": {
-    "date-fns": "^4.1.0",
-    "material-icons": "^1.13.14"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ]
-  }
+    "name": "todolist",
+    "version": "1.0.0",
+    "description": "Todo list",
+    "homepage": "https://github.com/stevec-afk/TodoList#readme",
+    "bugs": {
+        "url": "https://github.com/stevec-afk/TodoList/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/stevec-afk/TodoList.git"
+    },
+    "license": "MIT",
+    "author": "Steve C",
+    "main": "index.js",
+    "scripts": {
+        "test": "",
+        "build": "webpack --config webpack.prod.js",
+        "dev": "webpack serve --port 3000 --config webpack.dev.js",
+        "deploy": "git subtree push --prefix dist origin gh-pages",
+        "prepare": "husky"
+    },
+    "devDependencies": {
+        "@eslint/css": "^1.1.0",
+        "@eslint/js": "^10.0.1",
+        "@eslint/json": "^1.2.0",
+        "@eslint/markdown": "^8.0.1",
+        "css-loader": "^7.1.3",
+        "eslint": "^10.2.1",
+        "eslint-config-prettier": "^10.1.8",
+        "eslint-plugin-prettier": "^5.5.5",
+        "globals": "^17.5.0",
+        "html-loader": "^5.1.0",
+        "html-webpack-plugin": "^5.6.6",
+        "mini-css-extract-plugin": "^2.10.1",
+        "prettier": "^3.8.3",
+        "style-loader": "^4.0.0",
+        "webpack": "^5.104.1",
+        "webpack-cli": "^6.0.1",
+        "webpack-dev-server": "^5.2.3",
+        "webpack-merge": "^6.0.1"
+    },
+    "dependencies": {
+        "date-fns": "^4.1.0",
+        "material-icons": "^1.13.14"
+    },
+    "lint-staged": {
+        "*.{js,jsx,ts,tsx}": [
+            "eslint --fix",
+            "prettier --write"
+        ]
+    }
 }
